@@ -5,6 +5,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 import Earth from '../public/Earth'
 import Asteroid from '../public/Asteroid'
+import Satellite from '../public/Satellite'
 
 function App() {
   // Define the number of asteroids
@@ -34,6 +35,7 @@ function App() {
           {asteroids.map((asteroid) => (
             <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} />
           ))}
+          <Satellite position={[1, 0, 0]} />
         </Suspense>
         <Stars
           radius={100} // Radius of the spherical distribution of stars
