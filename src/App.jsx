@@ -6,6 +6,10 @@ import { OrbitControls, Stars } from '@react-three/drei'
 import Earth from '../public/Earth'
 import Asteroid from '../public/Asteroid'
 import Satellite from '../public/Satellite'
+import Mars from '../public/Mars'
+import Venus from '../public/Venus'
+import Jupiter from '../public/Jupiter'
+import Mercury from '../public/Mercury'
 
 function App() {
   // Define the number of asteroids
@@ -31,6 +35,10 @@ function App() {
         <OrbitControls />
         <Suspense fallback={null}>
           <Earth position={[0, 0, 0]} />
+          <Mars position={[5, 0, 0]} />
+          <Venus position={[-15, 0, 0]}/>
+          <Jupiter position={[15, 10, 0]}/>
+          <Mercury position={[12, 0, 10]}/>
           {/* Render each asteroid */}
           {asteroids.map((asteroid) => (
             <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} />
