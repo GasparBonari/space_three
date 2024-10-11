@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Suspense } from 'react'
 import './App.css'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei'
 import Earth from '../public/Earth'
 import Asteroid from '../public/Asteroid'
@@ -11,50 +11,78 @@ import Venus from '../public/Venus'
 import Jupiter from '../public/Jupiter'
 import Mercury from '../public/Mercury'
 
-function App() {
+function CameraController({ planets }) {
+  const [planetIndex, setPlanetIndex] = useState(0);
+
+  const scrollHandler = (event) => {
+    if (event.deltaY > 0 && planetIndex < planets.length - 1) {
+      setPlanetIndex((prevIndex) => prevIndex + 1);
+    } else if (event.deltaY < 0 && planetIndex > 0) {
+      setPlanetIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('wheel', scrollHandler);
+    return () => window.removeEventListener('wheel', scrollHandler);
+  }, [planetIndex]);
+
+  useFrame(({ camera }) => {
+    const targetPosition = planets[planetIndex].cameraPosition || planets[planetIndex].position;
+    camera.position.lerp(
+      {
+        x: targetPosition[0],
+        y: targetPosition[1],
+        z: targetPosition[2],
+      },
+      0.05 // Speed of transition
+    );
+  });
+
+  return null;
+}
+
+export default function App() {
   // Define the number of asteroids
   const numAsteroids = 10;
+  const distanceScale = 1 / 10;
 
   // Create an array to store asteroid objects
-  const asteroids = [];
+  const asteroids = Array.from({ length: numAsteroids }, (_, i) => ({
+    id: i,
+    position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10],
+    speed: Math.random() * 0.1 + 0.005,
+  }));
 
-  // Initialize asteroid objects
-  for (let i = 0; i < numAsteroids; i++) {
-    asteroids.push({
-      id: i,
-      position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10], // Random positions
-      speed: Math.random() * 0.1 + 0.005, // Random speed
-    });
-  }
+  const planets = [
+    { position: [80, 0, -10], cameraPosition: [80, 0, -8], name: 'Mercury' },
+    { position: [50, -0.7, -10], cameraPosition: [50.7, 0, -7.5], name: 'Venus' },
+    { position: [0, 0, 0], cameraPosition: [0, 0, 0.5], name: 'Earth' },
+    { position: [-50, 20, 10], cameraPosition: [-50, 20, 13], name: 'Mars' },
+    { position: [70, 50, 5], cameraPosition: [70, 50, 8], name: 'Jupiter' },
+  ];
 
   return (
     <>
-      <Canvas>
+      <Canvas camera={{ position: [0, 0, 15] }}>
         <ambientLight intensity={0.2} />
         <directionalLight intensity={5} position={[-20, 20, 0]} />
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <Suspense fallback={null}>
-          <Earth position={[0, 0, 0]} />
-          <Mars position={[5, 0, 0]} />
-          <Venus position={[-15, 0, 0]}/>
-          <Jupiter position={[15, 10, 0]}/>
-          <Mercury position={[12, 0, 10]}/>
+          <Mercury position={planets[0].position} />
+          <Venus position={planets[1].position} />
+          <Earth position={planets[2].position} />
+          <Mars position={planets[3].position} />
+          <Jupiter position={planets[4].position} />
           {/* Render each asteroid */}
           {asteroids.map((asteroid) => (
             <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} />
           ))}
           <Satellite position={[1, 0, 0]} />
         </Suspense>
-        <Stars
-          radius={100} // Radius of the spherical distribution of stars
-          depth={50} // Depth of the star field
-          count={5000} // Number of stars
-          factor={4} // Star size factor
-          saturation={0} // Saturation of the stars
-        />
+        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} />
+        <CameraController planets={planets} />
       </Canvas>
     </>
   )
 }
-
-export default App
