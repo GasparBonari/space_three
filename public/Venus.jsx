@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber';
 
 export default function Venus(props) {
   const { nodes, materials } = useGLTF('/venus.gltf')
+  const venusRef = useRef();
+
+  useFrame((_, delta) => {
+    if (venusRef.current) {
+      venusRef.current.rotation.y += 0.10 * delta;
+    }
+  });
+
+
   return (
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes.Object_2.geometry} scale={0.8} material={materials.moon} rotation={[-Math.PI / 2, 0, 0]} />
+    <group ref={venusRef} {...props} dispose={null}>
+      <mesh geometry={nodes.Object_4.geometry} material={materials['Scene_-_Root']} scale={1} />
     </group>
   )
 }

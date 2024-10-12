@@ -56,7 +56,7 @@ export default function App() {
 
   const planets = [
     { position: [80, 0, -10], cameraPosition: [80, 0, -8], name: 'Mercury' },
-    { position: [50, -0.7, -10], cameraPosition: [50.7, 0, -7.5], name: 'Venus' },
+    { position: [50, -0.7, -10], cameraPosition: [50, -0.7, -7.5], name: 'Venus' },
     { position: [0, 0, 0], cameraPosition: [0, 0, 0.5], name: 'Earth' },
     { position: [-50, 20, 10], cameraPosition: [-50, 20, 13], name: 'Mars' },
     { position: [70, 50, 5], cameraPosition: [70, 50, 8], name: 'Jupiter' },

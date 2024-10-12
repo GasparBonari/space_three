@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'; // Import useFrame hook
+import { useFrame } from '@react-three/fiber';
 
 export default function Earth(props) {
   const group = useRef()
