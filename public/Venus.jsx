@@ -8,7 +8,7 @@ export default function Venus(props) {
 
   useFrame((_, delta) => {
     if (venusRef.current) {
-      venusRef.current.rotation.y += 0.10 * delta;
+      venusRef.current.rotation.y -= 0.10 * delta;
     }
   });
 

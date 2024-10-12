@@ -6,16 +6,31 @@ import * as THREE from 'three';
 export default function Asteroid(props) {
     const { nodes, materials } = useGLTF('/asteroid.gltf');
     const asteroidRef = useRef();
-    const speed = props.speed; // Use the speed passed as prop
+    const speed = props.speed;
+    const planetPosition = props.planetPosition;
 
-    // Generate a random axis of rotation and rotation speed for the asteroid
+    // Random axis of rotation and rotation speed for the asteroid
     const randomAxis = new THREE.Vector3(Math.random(), Math.random(), Math.random()).normalize(); // Random unit vector for rotation axis
     const rotationSpeed = Math.random() * 0.05; // Random rotation speed
 
-    // Define the bounding spheres for Earth and the asteroid
+    function getInitialPosition() {
+        const radius = Math.random() * 20 + 5; // Random distance from the planet
+        const angle = Math.random() * Math.PI * 2; // Random angle around the planet
+        return new THREE.Vector3(
+            planetPosition[0] + radius * Math.cos(angle),
+            planetPosition[1] + (Math.random() * 5 - 2.5), // Adding vertical variation
+            planetPosition[2] + radius * Math.sin(angle)
+        );
+    }
+
+    if (!asteroidRef.current) {
+        asteroidRef.current = { position: getInitialPosition() };
+    }
+
+    // Bounding spheres for Earth and the asteroid
     const earthBoundingSphere = {
         center: [0, 0, 0],
-        radius: 1.9739451558252037, // Approximate radius of Earth model
+        radius: 1.9739451558252037, // Approximate radius of planet models
     };
 
     const asteroidBoundingSphere = {
@@ -23,7 +38,7 @@ export default function Asteroid(props) {
         radius: 0.591 * 0.1, // Approximate radius of asteroid model
     };
 
-    // Function to check collision between two bounding spheres
+    // Check collision between two bounding spheres
     function checkCollision(sphere1, sphere2) {
         const distanceSquared = Math.pow(sphere1.center[0] - sphere2.center[0], 2)
             + Math.pow(sphere1.center[1] - sphere2.center[1], 2)
@@ -48,9 +63,9 @@ export default function Asteroid(props) {
             }
 
             // Reset asteroid position if it moves outside the specified boundary
-            const boundary = 10; // Adjust this boundary as needed
-            if (Math.abs(asteroidRef.current.position.x) > boundary || Math.abs(asteroidRef.current.position.y) > boundary || Math.abs(asteroidRef.current.position.z) > boundary) {
-                asteroidRef.current.position.set(-10, -5 + Math.random() * 10, -5 + Math.random() * 10);
+            const boundary = 25; // Adjust this boundary as needed
+            if (asteroidRef.current.position.distanceTo(new THREE.Vector3(...planetPosition)) > boundary) {
+                asteroidRef.current.position.copy(getInitialPosition());
             }
         }
     });

@@ -43,16 +43,7 @@ function CameraController({ planets }) {
 }
 
 export default function App() {
-  // Define the number of asteroids
-  const numAsteroids = 10;
-  const distanceScale = 1 / 10;
-
-  // Create an array to store asteroid objects
-  const asteroids = Array.from({ length: numAsteroids }, (_, i) => ({
-    id: i,
-    position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10],
-    speed: Math.random() * 0.1 + 0.005,
-  }));
+  const numAsteroids = 50;
 
   const planets = [
     { position: [80, 0, -10], cameraPosition: [80, 0, -8], name: 'Mercury' },
@@ -61,6 +52,17 @@ export default function App() {
     { position: [-50, 20, 10], cameraPosition: [-50, 20, 13], name: 'Mars' },
     { position: [70, 50, 5], cameraPosition: [70, 50, 8], name: 'Jupiter' },
   ];
+
+  // Create an array to store asteroid objects
+  const asteroids = Array.from({ length: numAsteroids }, (_, i) => {
+    const randomPlanetIndex = Math.floor(Math.random() * planets.length); // Random planet index
+    return {
+      id: i,
+      position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10], // Initial random position
+      speed: Math.random() * 0.1 + 0.005,
+      planetPosition: planets[randomPlanetIndex].position, // Assign random planet's position
+    };
+  });
 
   return (
     <>
@@ -76,7 +78,7 @@ export default function App() {
           <Jupiter position={planets[4].position} />
           {/* Render each asteroid */}
           {asteroids.map((asteroid) => (
-            <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} />
+            <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} planetPosition={asteroid.planetPosition}/>
           ))}
           <Satellite position={[1, 0, 0]} />
         </Suspense>
