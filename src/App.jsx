@@ -10,6 +10,7 @@ import Mars from '../public/Mars'
 import Venus from '../public/Venus'
 import Jupiter from '../public/Jupiter'
 import Mercury from '../public/Mercury'
+import Sun from '../public/Sun';
 
 function CameraController({ planets }) {
   const [planetIndex, setPlanetIndex] = useState(0);
@@ -51,6 +52,7 @@ export default function App() {
     { position: [0, 0, 0], cameraPosition: [0, 0, 0.5], name: 'Earth' },
     { position: [-50, 20, 10], cameraPosition: [-50, 20, 13], name: 'Mars' },
     { position: [70, 50, 5], cameraPosition: [70, 50, 8], name: 'Jupiter' },
+    { position: [0, 0, 5], cameraPosition: [0, 0, 7], name: 'Sun' }
   ];
 
   // Create an array to store asteroid objects
@@ -76,6 +78,7 @@ export default function App() {
           <Earth position={planets[2].position} />
           <Mars position={planets[3].position} />
           <Jupiter position={planets[4].position} />
+          <Sun position={planets[5].position}/>
           {/* Render each asteroid */}
           {asteroids.map((asteroid) => (
             <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} planetPosition={asteroid.planetPosition}/>
