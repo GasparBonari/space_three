@@ -1,10 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei'
+import { useGLTF, useAnimations } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 
 export default function Sun(props) {
-  const group = React.useRef()
+  const sunRef = React.useRef()
   const { nodes, materials, animations } = useGLTF('/sun.gltf')
-  const { actions } = useAnimations(animations, group)
+  const { actions } = useAnimations(animations, sunRef)
+
+  useFrame((_, delta) => {
+    if (sunRef.current) {
+      sunRef.current.rotation.y += 0.10 * delta;
+    }
+  });
 
   useEffect(() => {
     // Trigger the animation named "Take 001"
@@ -23,7 +30,7 @@ export default function Sun(props) {
   }, [actions]);
 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={sunRef} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.022}>
           <group name="23c71f95b90948a0bb8746260230a45efbx" rotation={[-Math.PI, 0, 0]}>
