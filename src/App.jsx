@@ -13,16 +13,21 @@ import Mercury from '../public/Mercury';
 import Sun from '../public/Sun';
 
 // Component to control the camera and follow the orbiting planet
-function CameraController({ planets, planetIndex }) {
+function CameraController({ planets, planetIndex, isZoomed }) {
   useFrame(({ camera }) => {
     const planetRef = planets[planetIndex].ref;
     if (planetRef && planetRef.current) {
       const planetPosition = planetRef.current.position;
+      
+      // Get the custom zoom distance for each planet
+      const zoomDistance = isZoomed ? planets[planetIndex].zoomDistance : 10;  // Adjust zoom distance for each planet
+      const offsetX = isZoomed ? 1 : 5;  // Offset can also be customized if needed
+
       camera.position.lerp(
         {
-          x: planetPosition.x + 5,  // Offset from planet
-          y: planetPosition.y + 5,
-          z: planetPosition.z + 10,
+          x: planetPosition.x + offsetX,  // Offset from planet
+          y: planetPosition.y + offsetX,
+          z: planetPosition.z + zoomDistance,  // Adjust zoom distance based on planet size
         },
         0.05 // Smooth camera transition
       );
@@ -46,19 +51,22 @@ const Planet = React.forwardRef(({ radius, speed, initialAngle, children, ...pro
 
 export default function App() {
   const [planetIndex, setPlanetIndex] = useState(0); // Track which planet camera should follow
+  const [isZoomed, setIsZoomed] = useState(false);
   const numAsteroids = 50;
 
   // Create planet objects with a ref for each
   const planets = [
-    { name: 'Mercury', radius: 10, speed: 0.3, initialAngle: 0, ref: useRef() },
-    { name: 'Venus', radius: 15, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef() },
-    { name: 'Earth', radius: 20, speed: 0.1, initialAngle: Math.PI, ref: useRef() },
-    { name: 'Mars', radius: 25, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef() },
-    { name: 'Jupiter', radius: 35, speed: 0.05, initialAngle: 0, ref: useRef() },
+    { name: 'Mercury', radius: 10, speed: 0.3, initialAngle: 0, ref: useRef(), zoomDistance: 2 },  // Small planet, closer zoom
+    { name: 'Venus', radius: 15, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef(), zoomDistance: 3 },
+    { name: 'Earth', radius: 20, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
+    { name: 'Mars', radius: 25, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
+    { name: 'Jupiter', radius: 35, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
   ];
 
   // Scroll handler to switch between planets
   const scrollHandler = (event) => {
+    setIsZoomed(false)
+
     if (event.deltaY > 0 && planetIndex < planets.length - 1) {
       setPlanetIndex((prevIndex) => prevIndex + 1);
     } else if (event.deltaY < 0 && planetIndex > 0) {
@@ -70,6 +78,16 @@ export default function App() {
     window.addEventListener('wheel', scrollHandler);
     return () => window.removeEventListener('wheel', scrollHandler);
   }, [planetIndex]);
+
+  // Handle planet click
+  const handlePlanetClick = (index) => {
+    if (planetIndex === index) {
+      setIsZoomed((prevZoom) => !prevZoom);  // Toggle zoom when clicking the same planet
+    } else {
+      setPlanetIndex(index);  // Switch to the clicked planet
+      setIsZoomed(true);      // Zoom in on the new planet
+    }
+  };
 
   // Create an array to store asteroid objects
   const asteroids = Array.from({ length: numAsteroids }, (_, i) => {
@@ -100,6 +118,7 @@ export default function App() {
               radius={planet.radius} 
               speed={planet.speed} 
               initialAngle={planet.initialAngle}
+              onClick={() => handlePlanetClick(index)}
             >
               {index === 0 && <Mercury />}
               {index === 1 && <Venus />}
@@ -120,7 +139,7 @@ export default function App() {
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} />
 
         {/* Camera controller to follow planets */}
-        <CameraController planets={planets} planetIndex={planetIndex} />
+        <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} />
       </Canvas>
     </>
   );
