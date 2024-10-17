@@ -133,7 +133,7 @@ export default function App() {
             <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} planetPosition={asteroid.planetPosition} />
           ))}
 
-          <Satellite position={[1, 0, 0]} />
+          <Satellite earthRef={planets[2].ref} />
         </Suspense>
 
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} />

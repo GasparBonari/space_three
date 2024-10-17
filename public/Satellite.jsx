@@ -2,27 +2,29 @@ import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
-export default function Satellite(props) {
+export default function Satellite({ earthRef }) {
   const { nodes, materials } = useGLTF('/satellite.gltf')
   const satelliteRef = useRef();
 
   // Define orbit parameters
-  const orbitRadius = 1; // Radius of the orbit
-  const orbitSpeed = 0.3; // Speed of orbit
+  const orbitRadius = 1.5; // Radius of the orbit
+  const orbitSpeed = 0.4; // Speed of orbit
 
   // Update the satellite's position to make it orbit around the Earth
-  useFrame((state, delta) => {
-      if (satelliteRef.current) {
-          // Update position along the orbit
-          const theta = state.clock.getElapsedTime() * orbitSpeed; // Angle in radians
-          const x = Math.cos(theta) * orbitRadius;
-          const z = Math.sin(theta) * orbitRadius;
-          satelliteRef.current.position.set(x, 0, z);
-      }
+  useFrame((state) => {
+    if (satelliteRef.current && earthRef.current) {
+      const theta = state.clock.getElapsedTime() * orbitSpeed; // Angle in radians for the orbit
+      const earthPosition = earthRef.current.position; // Earth's current position
+      
+      // Calculate satellite's position relative to Earth
+      const x = earthPosition.x + Math.cos(theta) * orbitRadius;
+      const z = earthPosition.z + Math.sin(theta) * orbitRadius;
+      satelliteRef.current.position.set(x, earthPosition.y, z); // Orbiting in the xz-plane at Earth's y-level
+    }
   });
 
   return (
-    <group {...props} ref={satelliteRef} dispose={null}>
+    <group ref={satelliteRef} dispose={null}>
       <group rotation={[-1.755, 0.06, 2.589]} scale={[0.02, 0.02, 0.02]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0, 0.186]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={[0.875, 0.883, 0.875]}>
