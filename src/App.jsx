@@ -97,6 +97,11 @@ export default function App() {
       position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10],
       speed: Math.random() * 0.1 + 0.005,
       planetPosition: planets[randomPlanetIndex].ref.current?.position || [0, 0, 0],
+      direction: [
+        Math.random() * 2 - 1, // Random x direction
+        Math.random() * 2 - 1, // Random y direction
+        Math.random() * 2 - 1  // Random z direction
+      ]
     };
   });
 
@@ -130,7 +135,13 @@ export default function App() {
 
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
-            <Asteroid key={asteroid.id} position={asteroid.position} speed={asteroid.speed} planetPosition={asteroid.planetPosition} />
+            <Asteroid 
+              key={asteroid.id} 
+              position={asteroid.position} 
+              speed={asteroid.speed}
+              direction={asteroid.direction}
+              planetPosition={asteroid.planetPosition} 
+            />
           ))}
 
           <Satellite earthRef={planets[2].ref} />
