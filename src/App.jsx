@@ -11,6 +11,7 @@ import Venus from '../public/Venus';
 import Jupiter from '../public/Jupiter';
 import Mercury from '../public/Mercury';
 import Sun from '../public/Sun';
+import Moon from '../public/Moon';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -50,7 +51,7 @@ const Planet = React.forwardRef(({ radius, speed, initialAngle, children, ...pro
 });
 
 export default function App() {
-  const [planetIndex, setPlanetIndex] = useState(0); // Track which planet camera should follow
+  const [planetIndex, setPlanetIndex] = useState(2); // Track which planet camera should follow
   const [isZoomed, setIsZoomed] = useState(false);
   const numAsteroids = 50;
 
@@ -133,6 +134,9 @@ export default function App() {
             </Planet>
           ))}
 
+          {/* Moon */}
+          <Moon earthRef={planets[2].ref}/>
+          
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
             <Asteroid 
