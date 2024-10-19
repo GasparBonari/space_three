@@ -12,6 +12,8 @@ import Jupiter from '../public/Jupiter';
 import Mercury from '../public/Mercury';
 import Sun from '../public/Sun';
 import Moon from '../public/Moon';
+import Saturn from '../public/Saturn';
+import Uranus from '../public/Uranus';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -61,7 +63,9 @@ export default function App() {
     { name: 'Venus', radius: 15, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef(), zoomDistance: 3 },
     { name: 'Earth', radius: 20, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
     { name: 'Mars', radius: 25, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
-    { name: 'Jupiter', radius: 35, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
+    { name: 'Jupiter', radius: 30, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
+    { name: 'Saturn', radius: 35, speed: 0.08, initialAngle: Math.PI / 4, ref: useRef(), zoomDistance: 10 }, // Saturn's settings
+    { name: 'Uranus', radius: 50, speed: 0.08, initialAngle: Math.PI / 5, ref: useRef(), zoomDistance: 10 }, // Saturn's settings
   ];
 
   // Scroll handler to switch between planets
@@ -131,6 +135,8 @@ export default function App() {
               {index === 2 && <Earth />}
               {index === 3 && <Mars />}
               {index === 4 && <Jupiter />}
+              {index === 5 && <Saturn />}
+              {index === 6 && <Uranus />}
             </Planet>
           ))}
 
@@ -151,7 +157,7 @@ export default function App() {
           <Satellite earthRef={planets[2].ref} />
         </Suspense>
 
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} />
+        <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
 
         {/* Camera controller to follow planets */}
         <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} />

@@ -30,7 +30,7 @@ export default function Moon({ earthRef }) {
   return (
     <group ref={moonRef} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Material__50} rotation={[-Math.PI / 2, 0, 0]} scale={0.1}/>
+        <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Material__50} rotation={[-Math.PI / 2, 0, 0]} scale={0.2}/>
       </group>
     </group>
   )
