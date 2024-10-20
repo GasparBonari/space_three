@@ -64,8 +64,8 @@ export default function App() {
     { name: 'Earth', radius: 20, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
     { name: 'Mars', radius: 25, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
     { name: 'Jupiter', radius: 30, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
-    { name: 'Saturn', radius: 35, speed: 0.08, initialAngle: Math.PI / 4, ref: useRef(), zoomDistance: 10 }, // Saturn's settings
-    { name: 'Uranus', radius: 50, speed: 0.08, initialAngle: Math.PI / 5, ref: useRef(), zoomDistance: 10 }, // Saturn's settings
+    { name: 'Saturn', radius: 40, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
+    { name: 'Uranus', radius: 55, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
   ];
 
   // Scroll handler to switch between planets
@@ -115,7 +115,7 @@ export default function App() {
       <Canvas camera={{ position: [0, 0, 40] }}>
         <ambientLight intensity={0.2} />
         {/* <directionalLight intensity={5} position={[-20, 20, 0]} /> */}
-        <pointLight position={[0, 0, 0]} intensity={500} decay={2} distance={2000} />
+        <pointLight position={[0, 0, 0]} intensity={1000} decay={2} distance={2000} />
         <Suspense fallback={null}>
           {/* Sun */}
           <Sun position={[0, 0, 0]} />

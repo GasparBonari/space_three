@@ -32,7 +32,7 @@ export default function Sun(props) {
   return (
     <group ref={sunRef} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.022}>
+        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.08}>
           <group name="23c71f95b90948a0bb8746260230a45efbx" rotation={[-Math.PI, 0, 0]}>
             <group name="Object_2">
               <group name="RootNode">

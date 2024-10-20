@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber';
 
 export default function Uranus(props) {
   const { nodes, materials } = useGLTF('/uranus.gltf')
+  const uranusRef = useRef();
+
+  useFrame((_, delta) => {
+    if (uranusRef.current) {
+      uranusRef.current.rotation.y -= 0.9 * delta;
+    }
+  });
+
   return (
     <group {...props} dispose={null}>
-      <group rotation={[-1.703, 0, 0]} scale={0.01}>
+      <group ref={ uranusRef } rotation={[-1.703, 0, 0]} scale={0.01}>
         <mesh geometry={nodes.Esfera_Mat1_0.geometry} material={materials['Mat.1']} />
         <mesh geometry={nodes.Esfera_Mat1_0_1.geometry} material={materials['Mat.1']} />
         <mesh geometry={nodes.Esfera_Mat1_0_2.geometry} material={materials['Mat.1']} />

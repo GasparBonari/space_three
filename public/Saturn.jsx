@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber';
 
 export default function Saturn(props) {
   const { nodes, materials } = useGLTF('/saturn.gltf')
+  const saturnRef = useRef();
+
+  useFrame((_, delta) => {
+    if (saturnRef.current) {
+      saturnRef.current.rotation.y += 0.10 * delta;
+    }
+  });
 
   // Clone the rings material and add an emissive property
   const ringsMaterial = materials.material.clone() // Assuming 'materials.material' is the rings material
@@ -10,7 +18,7 @@ export default function Saturn(props) {
   ringsMaterial.emissiveIntensity = 0.04 // Adjust the emissive intensity to make the rings glow
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={ saturnRef } {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group position={[0, 0, 0]} rotation={[-1.571, -1.386, 0.001]} scale={1.8}>
           <mesh geometry={nodes.Object_5.geometry} material={ringsMaterial} position={[0.017, 0, 0.001]} rotation={[1.571, -0.002, -1.386]} scale={0.005} />
