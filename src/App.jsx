@@ -14,6 +14,7 @@ import Sun from '../public/Sun';
 import Moon from '../public/Moon';
 import Saturn from '../public/Saturn';
 import Uranus from '../public/Uranus';
+import ISS from '../public/Iss';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -140,8 +141,10 @@ export default function App() {
             </Planet>
           ))}
 
-          {/* Moon */}
+          {/* Models for Earth */}
           <Moon earthRef={planets[2].ref}/>
+          <ISS earthRef={planets[2].ref} />
+          <Satellite earthRef={planets[2].ref} />
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
@@ -153,8 +156,6 @@ export default function App() {
               planetPosition={asteroid.planetPosition} 
             />
           ))}
-
-          <Satellite earthRef={planets[2].ref} />
         </Suspense>
 
         <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
