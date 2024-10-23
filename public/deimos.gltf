@@ -1,0 +1,387 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 31996,
+      "max": [
+        742.0047607421875,
+        568.518798828125,
+        650.4425048828125
+      ],
+      "min": [
+        -800.8877563476563,
+        -512.8988037109375,
+        -575.4205932617188
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 383952,
+      "componentType": 5126,
+      "count": 31996,
+      "max": [
+        0.9984143376350403,
+        0.9999940991401672,
+        0.9994767904281616
+      ],
+      "min": [
+        -0.9999716281890869,
+        -0.9999980926513672,
+        -0.9999231100082397
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 31996,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.20121198892593384,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 255968,
+      "componentType": 5126,
+      "count": 31996,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.20121198892593384,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 188160,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "uperesito (https://sketchfab.com/uperesito)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/deimos-db9c281d0a7b4452aaac26eb1d3738ad",
+      "title": "Deimos"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 752640,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 511936,
+      "byteOffset": 752640,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 767904,
+      "byteOffset": 1264576,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 2032480,
+      "uri": "deimos.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/deimos_texture.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "01_-_Default",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Deimos_01 - Default_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2,
+            "TEXCOORD_1": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "798c6c25e79f4c1492771e0000a89948.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Object_2"
+    },
+    {
+      "children": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        15,
+        16
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "Cinema_4D_Editor",
+      "rotation": [
+        -0.06359640508890152,
+        0.5714775323867798,
+        -0.09048852324485779,
+        0.8131301999092102
+      ],
+      "translation": [
+        -3785.2783203125,
+        844.010009765625,
+        9412.60546875
+      ]
+    },
+    {
+      "name": "Object_5"
+    },
+    {
+      "children": [
+        7
+      ],
+      "name": "C��mara_2",
+      "rotation": [
+        -0.005101422313600779,
+        0.5845814347267151,
+        -0.007079805713146925,
+        0.8112881183624268
+      ],
+      "translation": [
+        -1667.7244873046875,
+        221.51406860351563,
+        8513.9169921875
+      ]
+    },
+    {
+      "name": "Object_7"
+    },
+    {
+      "children": [
+        9
+      ],
+      "name": "C��mara_1",
+      "rotation": [
+        -0.035335540771484375,
+        0.9752768278121948,
+        0.007898417301476002,
+        -0.21800018846988678
+      ],
+      "translation": [
+        13627.9921875,
+        1131.5111083984375,
+        -5084.7861328125
+      ]
+    },
+    {
+      "name": "Object_9"
+    },
+    {
+      "children": [
+        11
+      ],
+      "name": "C��mara",
+      "rotation": [
+        -0.1388172060251236,
+        0.917885959148407,
+        -0.05559319257736206,
+        0.36759287118911743
+      ],
+      "translation": [
+        8854.64453125,
+        3788.12158203125,
+        8446.9111328125
+      ]
+    },
+    {
+      "name": "Object_11"
+    },
+    {
+      "children": [
+        13
+      ],
+      "name": "Luz",
+      "rotation": [
+        0.7071068286895752,
+        0.0,
+        0.0,
+        0.7071068286895752
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        5398.25634765625
+      ]
+    },
+    {
+      "children": [
+        14
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Object_13"
+    },
+    {
+      "name": "Object_14"
+    },
+    {
+      "name": "Cielo"
+    },
+    {
+      "children": [
+        17
+      ],
+      "name": "Deimos",
+      "rotation": [
+        -6.537858610045078e-08,
+        -0.7071068286895752,
+        0.7071068286895752,
+        -6.537858610045078e-08
+      ],
+      "translation": [
+        -2676.179443359375,
+        3.898661450098262e-13,
+        6366.99755859375
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Deimos_01 - Default_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}

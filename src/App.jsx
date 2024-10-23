@@ -15,6 +15,8 @@ import Moon from '../public/Moon';
 import Saturn from '../public/Saturn';
 import Uranus from '../public/Uranus';
 import ISS from '../public/Iss';
+import Phobos from '../public/Phobos';
+import Deimos from '../public/Deimos';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -145,6 +147,10 @@ export default function App() {
           <Moon earthRef={planets[2].ref}/>
           <ISS earthRef={planets[2].ref} />
           <Satellite earthRef={planets[2].ref} />
+
+          {/* Models for Mars */}
+          <Phobos marsRef={planets[3].ref} />
+          <Deimos marsRef={planets[3].ref} />
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
