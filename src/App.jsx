@@ -18,6 +18,7 @@ import ISS from '../public/Iss';
 import Phobos from '../public/Phobos';
 import Deimos from '../public/Deimos';
 import Comet from '../public/Comet';
+import ColorStars from '../public/ColorStars';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -164,10 +165,11 @@ export default function App() {
             />
           ))}
 
-          <Comet/>
+          {/* <Comet/> */}
         </Suspense>
 
         <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
+        <ColorStars />
 
         {/* Camera controller to follow planets */}
         <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} />
