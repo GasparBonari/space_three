@@ -37,7 +37,7 @@ function CameraController({ planets, planetIndex, isZoomed }) {
           y: planetPosition.y + offsetX,
           z: planetPosition.z + zoomDistance,  // Adjust zoom distance based on planet size
         },
-        0.05 // Smooth camera transition
+        0.03 // Smooth camera transition
       );
       camera.lookAt(planetPosition); // Keep looking at the planet
     }
@@ -133,7 +133,10 @@ export default function App() {
               radius={planet.radius} 
               speed={planet.speed} 
               initialAngle={planet.initialAngle}
-              onClick={() => handlePlanetClick(index)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePlanetClick(index);
+              }}
             >
               {index === 0 && <Mercury />}
               {index === 1 && <Venus />}
