@@ -19,6 +19,8 @@ import Phobos from '../public/Phobos';
 import Deimos from '../public/Deimos';
 import Comet from '../public/Comet';
 import ColorStars from '../public/ColorStars';
+import Ganymede from '../public/Ganymede';
+import Callisto from '../public/Callisto';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -156,6 +158,10 @@ export default function App() {
           {/* Models for Mars */}
           <Phobos marsRef={planets[3].ref} />
           <Deimos marsRef={planets[3].ref} />
+
+          {/* Jupiter for Mars */}
+          {/* <Ganymede/>
+          <Callisto/> */}
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
