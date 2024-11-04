@@ -21,6 +21,8 @@ import Comet from '../public/Comet';
 import ColorStars from '../public/ColorStars';
 import Ganymede from '../public/Ganymede';
 import Callisto from '../public/Callisto';
+import Europa from '../public/Europa';
+import Io from '../public/Io';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -161,7 +163,9 @@ export default function App() {
 
           {/* Jupiter for Mars */}
           {/* <Ganymede/>
-          <Callisto/> */}
+          <Callisto/>
+          <Europa/>
+          <Io/> */}
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
