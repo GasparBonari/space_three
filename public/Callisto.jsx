@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
-export default function Callisto(props) {
+export default function Callisto({ jupiterRef }) {
   const { nodes, materials } = useGLTF('/callisto.gltf')
+  const callistoRef = useRef();
+  
+  const orbitRadius = 6; // Radius of the orbit
+  const orbitSpeed = 0.2; // Speed of the orbit
+  const rotationSpeed = 0.01; // Rotation own axis
+
+  useFrame((state) => {
+    if (callistoRef.current && jupiterRef.current) {
+      const theta = state.clock.getElapsedTime() * orbitSpeed;
+      const earthPosition = jupiterRef.current.position;
+      
+      const x = earthPosition.x + Math.cos(theta) * orbitRadius;
+      const z = earthPosition.z + Math.sin(theta) * orbitRadius;
+      callistoRef.current.position.set(x, earthPosition.y, z); 
+
+      callistoRef.current.rotation.y -= rotationSpeed;
+    }
+  });
   return (
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes['Ganimede_Material_#25_0'].geometry} material={materials.Material_25} position={[-3.673, 0, 4.312]} rotation={[-Math.PI / 2, 0, 0]} scale={0.1}/>
+    <group ref={callistoRef} dispose={null}>
+      <mesh geometry={nodes['Ganimede_Material_#25_0'].geometry} material={materials.Material_25} scale={0.01}/>
     </group>
   )
 }

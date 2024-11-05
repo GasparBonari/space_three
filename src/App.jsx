@@ -69,12 +69,12 @@ export default function App() {
   // Create planet objects with a ref for each
   const planets = [
     { name: 'Mercury', radius: 10, speed: 0.3, initialAngle: 0, ref: useRef(), zoomDistance: 2 },  // Small planet, closer zoom
-    { name: 'Venus', radius: 15, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef(), zoomDistance: 3 },
-    { name: 'Earth', radius: 20, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
-    { name: 'Mars', radius: 25, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
-    { name: 'Jupiter', radius: 30, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
-    { name: 'Saturn', radius: 40, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
-    { name: 'Uranus', radius: 55, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
+    { name: 'Venus', radius: 20, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef(), zoomDistance: 3 },
+    { name: 'Earth', radius: 25, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
+    { name: 'Mars', radius: 35, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
+    { name: 'Jupiter', radius: 50, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
+    { name: 'Saturn', radius: 60, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
+    { name: 'Uranus', radius: 65, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
   ];
 
   // Scroll handler to switch between planets
@@ -162,10 +162,10 @@ export default function App() {
           <Deimos marsRef={planets[3].ref} />
 
           {/* Jupiter for Mars */}
-          {/* <Ganymede/>
-          <Callisto/>
-          <Europa/>
-          <Io/> */}
+          <Ganymede jupiterRef={planets[4].ref}/>
+          <Callisto jupiterRef={planets[4].ref}/>
+          <Europa jupiterRef={planets[4].ref}/>
+          <Io jupiterRef={planets[4].ref}/>
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
