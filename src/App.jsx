@@ -23,6 +23,7 @@ import Ganymede from '../public/Ganymede';
 import Callisto from '../public/Callisto';
 import Europa from '../public/Europa';
 import Io from '../public/Io';
+import Neptune from '../public/Neptune';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -75,6 +76,7 @@ export default function App() {
     { name: 'Jupiter', radius: 50, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
     { name: 'Saturn', radius: 60, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
     { name: 'Uranus', radius: 65, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
+    { name: 'Neptune', radius: 80, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 10 },
   ];
 
   // Scroll handler to switch between planets
@@ -149,6 +151,7 @@ export default function App() {
               {index === 4 && <Jupiter />}
               {index === 5 && <Saturn />}
               {index === 6 && <Uranus />}
+              {index === 7 && <Neptune />}
             </Planet>
           ))}
 
