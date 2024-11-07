@@ -76,7 +76,7 @@ export default function App() {
     { name: 'Jupiter', radius: 50, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
     { name: 'Saturn', radius: 60, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
     { name: 'Uranus', radius: 65, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
-    { name: 'Neptune', radius: 80, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 10 },
+    { name: 'Neptune', radius: 80, speed: 0.04, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 10 },
   ];
 
   // Scroll handler to switch between planets

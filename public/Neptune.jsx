@@ -8,7 +8,9 @@ export default function Neptune(props) {
 
   useEffect(() => {
     if (actions && animations[0]?.name) {
-      actions[animations[0].name].play();
+      const action = actions[animations[0].name];
+      action.play();
+      action.timeScale = 0.1;
     }
   }, [actions, animations]);
 
@@ -22,7 +24,7 @@ export default function Neptune(props) {
                 <group name="Planeta" rotation={[-Math.PI / 2, 0, 0]} scale={0.5}>
                   <mesh name="Planeta_Planeta_0" geometry={nodes.Planeta_Planeta_0.geometry} material={materials.Planeta} />
                 </group>
-                <group name="Atmosfera" rotation={[-Math.PI / 2, 0, 0]} scale={0.5}>
+                <group name="Atmosfera" rotation={[-Math.PI / 2, 0, 0]} scale={0.52}>
                   <mesh name="Atmosfera_Atmosfera_0" geometry={nodes.Atmosfera_Atmosfera_0.geometry} material={materials.Atmosfera} />
                 </group>
               </group>
