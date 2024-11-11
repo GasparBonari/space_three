@@ -17,7 +17,6 @@ import Uranus from '../public/Uranus';
 import ISS from '../public/Iss';
 import Phobos from '../public/Phobos';
 import Deimos from '../public/Deimos';
-import Comet from '../public/Comet';
 import ColorStars from '../public/ColorStars';
 import Ganymede from '../public/Ganymede';
 import Callisto from '../public/Callisto';
@@ -164,7 +163,7 @@ export default function App() {
           <Phobos marsRef={planets[3].ref} />
           <Deimos marsRef={planets[3].ref} />
 
-          {/* Jupiter for Mars */}
+          {/* Models for Jupiter */}
           <Ganymede jupiterRef={planets[4].ref}/>
           <Callisto jupiterRef={planets[4].ref}/>
           <Europa jupiterRef={planets[4].ref}/>
@@ -180,8 +179,6 @@ export default function App() {
               planetPosition={asteroid.planetPosition} 
             />
           ))}
-
-          {/* <Comet/> */}
         </Suspense>
 
         <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
