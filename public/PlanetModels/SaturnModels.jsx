@@ -3,7 +3,7 @@ import Dione from '../Dione';
 import Enceladus from '../Enceladus';
 import Mimas from '../Mimas';
 import Rhea from '../Rhea';
-import Tethys from '../Tethys';
+import Tethys from '../TeThys';
 import Iapetus from '../Iapetus';
 
 export default function SaturnModels({ saturnRef }) {
