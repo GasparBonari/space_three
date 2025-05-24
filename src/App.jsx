@@ -3,26 +3,23 @@ import { Suspense } from 'react';
 import './App.css';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
+
 import Earth from '../public/Earth';
 import Asteroid from '../public/Asteroid';
-import Satellite from '../public/Satellite';
 import Mars from '../public/Mars';
 import Venus from '../public/Venus';
 import Jupiter from '../public/Jupiter';
 import Mercury from '../public/Mercury';
 import Sun from '../public/Sun';
-import Moon from '../public/Moon';
 import Saturn from '../public/Saturn';
 import Uranus from '../public/Uranus';
-import ISS from '../public/Iss';
-import Phobos from '../public/Phobos';
-import Deimos from '../public/Deimos';
 import ColorStars from '../public/ColorStars';
-import Ganymede from '../public/Ganymede';
-import Callisto from '../public/Callisto';
-import Europa from '../public/Europa';
-import Io from '../public/Io';
 import Neptune from '../public/Neptune';
+
+import EarthModels from '../public/PlanetModels/EarthModels';
+import MarsModels from '../public/PlanetModels/MarsModels';
+import JupiterModels from '../public/PlanetModels/JupiterModels';
+import SaturnModels from '../public/PlanetModels/SaturnModels';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -155,19 +152,16 @@ export default function App() {
           ))}
 
           {/* Models for Earth */}
-          <Moon earthRef={planets[2].ref}/>
-          <ISS earthRef={planets[2].ref} />
-          <Satellite earthRef={planets[2].ref} />
+          <EarthModels earthRef={planets[2].ref} />
 
           {/* Models for Mars */}
-          <Phobos marsRef={planets[3].ref} />
-          <Deimos marsRef={planets[3].ref} />
+          <MarsModels marsRef={planets[3].ref} />
 
           {/* Models for Jupiter */}
-          <Ganymede jupiterRef={planets[4].ref}/>
-          <Callisto jupiterRef={planets[4].ref}/>
-          <Europa jupiterRef={planets[4].ref}/>
-          <Io jupiterRef={planets[4].ref}/>
+          <JupiterModels jupiterRef={planets[4].ref} />
+
+          {/* Models for Saturn */}
+          <SaturnModels saturnRef={planets[5].ref} />
           
           {/* Asteroids */}
           {asteroids.map((asteroid) => (
