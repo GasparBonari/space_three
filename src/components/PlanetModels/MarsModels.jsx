@@ -1,5 +1,5 @@
-import Phobos from '../Phobos';
-import Deimos from '../Deimos';
+import Phobos from '../Moons/Phobos';
+import Deimos from '../Moons/Deimos';
 
 export default function MarsModels({ marsRef }) {
   return (

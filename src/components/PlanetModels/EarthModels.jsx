@@ -1,6 +1,6 @@
-import Moon from '../Moon';
-import ISS from '../Iss';
-import Satellite from '../Satellite';
+import Moon from '../Moons/Moon';
+import ISS from '../Satellites/Iss';
+import Satellite from '../Satellites/Satellite';
 
 export default function EarthModels({ earthRef }) {
   return (

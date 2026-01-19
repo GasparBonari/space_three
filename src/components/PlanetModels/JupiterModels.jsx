@@ -1,7 +1,7 @@
-import Ganymede from '../Ganymede';
-import Callisto from '../Callisto';
-import Europa from '../Europa';
-import Io from '../Io';
+import Ganymede from '../Moons/Ganymede';
+import Callisto from '../Moons/Callisto';
+import Europa from '../Moons/Europa';
+import Io from '../Moons/Io';
 
 export default function JupiterModels({ jupiterRef }) {
   return (

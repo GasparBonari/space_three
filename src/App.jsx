@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Suspense } from 'react';
-import './App.css';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
+import './App.css';
 
-import Earth from '../public/Earth';
-import Asteroid from '../public/Asteroid';
-import Mars from '../public/Mars';
-import Venus from '../public/Venus';
-import Jupiter from '../public/Jupiter';
-import Mercury from '../public/Mercury';
-import Sun from '../public/Sun';
-import Saturn from '../public/Saturn';
-import Uranus from '../public/Uranus';
-import ColorStars from '../public/ColorStars';
-import Neptune from '../public/Neptune';
+import Earth from './components/Planets/Earth';
+import Asteroid from './components/Asteroids/Asteroid';
+import Mars from './components/Planets/Mars';
+import Venus from './components/Planets/Venus';
+import Jupiter from './components/Planets/Jupiter';
+import Mercury from './components/Planets/Mercury';
+import Sun from './components/Planets/Sun';
+import Saturn from './components/Planets/Saturn';
+import Uranus from './components/Planets/Uranus';
+import ColorStars from './components/Stars/ColorStars';
+import Neptune from './components/Planets/Neptune';
 
-import EarthModels from '../public/PlanetModels/EarthModels';
-import MarsModels from '../public/PlanetModels/MarsModels';
-import JupiterModels from '../public/PlanetModels/JupiterModels';
-import SaturnModels from '../public/PlanetModels/SaturnModels';
+import EarthModels from './components/PlanetModels/EarthModels';
+import MarsModels from './components/PlanetModels/MarsModels';
+import JupiterModels from './components/PlanetModels/JupiterModels';
+import SaturnModels from './components/PlanetModels/SaturnModels';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
