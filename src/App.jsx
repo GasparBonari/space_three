@@ -82,9 +82,13 @@ export default function App() {
     setIsZoomed(false)
 
     if (event.deltaY > 0 && planetIndex < planets.length - 1) {
-      setPlanetIndex((prevIndex) => prevIndex + 1);
+      const next = planetIndex + 1;
+      setPlanetIndex(next);
+      setSelectedPlanet((prev) => (prev !== null ? next : prev));
     } else if (event.deltaY < 0 && planetIndex > 0) {
-      setPlanetIndex((prevIndex) => prevIndex - 1);
+      const next = planetIndex - 1;
+      setPlanetIndex(next);
+      setSelectedPlanet((prev) => (prev !== null ? next : prev));
     }
   };
 

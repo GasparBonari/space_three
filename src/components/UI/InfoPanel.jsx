@@ -114,7 +114,6 @@ export default function InfoPanel({ planet, onClose }) {
 
         <div className="info-panel__actions">
           <a className="btn btn--primary" href={wikiUrl} target="_blank" rel="noreferrer">Open Wiki</a>
-          <button className="btn" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
