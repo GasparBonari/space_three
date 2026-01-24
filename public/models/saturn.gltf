@@ -488,10 +488,10 @@
   ],
   "images": [
     {
-      "uri": "textures/material_0_baseColor.jpeg"
+      "uri": "../textures/material_0_baseColor.jpeg"
     },
     {
-      "uri": "textures/material_baseColor_saturn.png"
+      "uri": "../textures/material_baseColor_saturn.png"
     }
   ],
   "materials": [

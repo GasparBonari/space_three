@@ -3,24 +3,24 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 33708,
+      "count": 8458,
       "max": [
-        0.9872313737869263,
-        0.9975767135620117,
-        0.9872314929962158
+        128.55795288085938,
+        128.55796813964844,
+        128.55796813964844
       ],
       "min": [
-        -0.9872310161590576,
-        -0.9975767135620117,
-        -0.9872310161590576
+        -128.5579071044922,
+        -128.55792236328125,
+        -128.55796813964844
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 404496,
+      "byteOffset": 101496,
       "componentType": 5126,
-      "count": 33708,
+      "count": 8458,
       "max": [
         1.0,
         1.0,
@@ -36,10 +36,10 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 33708,
+      "count": 8458,
       "max": [
-        1.0000003576278687,
-        1.0000001192092896
+        1.0,
+        1.0
       ],
       "min": [
         0.0,
@@ -50,39 +50,39 @@
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 190464,
+      "count": 47958,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "PatelDev (https://sketchfab.com/PatelDev)",
+      "author": "Shady Tex (https://sketchfab.com/ShadyTex4u)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/venus-36fe5066544f4f5e9eaf79dcb35a19c0",
-      "title": "Venus"
+      "source": "https://sketchfab.com/3d-models/realistic-jupiter-993ba62a539e4c308e9e3137df454ed6",
+      "title": "Realistic Jupiter"
     },
-    "generator": "Sketchfab-12.68.0",
+    "generator": "Sketchfab-15.36.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 761856,
+      "byteLength": 191832,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 269664,
-      "byteOffset": 761856,
+      "byteLength": 67664,
+      "byteOffset": 191832,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 808992,
-      "byteOffset": 1031520,
+      "byteLength": 202992,
+      "byteOffset": 259496,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
@@ -90,31 +90,30 @@
   ],
   "buffers": [
     {
-      "byteLength": 1840512,
-      "uri": "venus.bin"
+      "byteLength": 462488,
+      "uri": "jupiter.bin"
     }
   ],
   "images": [
     {
-      "uri": "textures/Scene_-_Root_baseColor.jpeg"
+      "uri": "../textures/Material_baseColor.jpeg"
     }
   ],
   "materials": [
     {
       "doubleSided": true,
-      "name": "Scene_-_Root",
+      "name": "Material",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 0
         },
-        "metallicFactor": 0.0,
-        "roughnessFactor": 0.5
+        "metallicFactor": 0.0
       }
     }
   ],
   "meshes": [
     {
-      "name": "Object_0",
+      "name": "Sphere_Material_0",
       "primitives": [
         {
           "attributes": {
@@ -136,16 +135,16 @@
       ],
       "matrix": [
         1.0,
+        6.842791131287157e-32,
+        -2.832769343193999e-16,
         0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
+        -2.832769343193999e-16,
+        3.828568672208042e-16,
         -1.0,
         0.0,
-        0.0,
+        4.002661120305586e-32,
         1.0,
-        2.220446049250313e-16,
+        3.828568672208042e-16,
         0.0,
         0.0,
         0.0,
@@ -158,59 +157,59 @@
       "children": [
         2
       ],
-      "name": "root"
-    },
-    {
-      "children": [
-        3
-      ],
       "matrix": [
-        1.0,
+        0.009999999776482582,
         0.0,
         0.0,
         0.0,
         0.0,
-        2.220446049250313e-16,
-        1.0,
+        0.0,
+        0.009999999776482582,
         0.0,
         0.0,
-        -1.0,
-        2.220446049250313e-16,
+        -0.009999999776482582,
+        0.0,
         0.0,
         0.0,
         0.0,
         0.0,
         1.0
       ],
-      "name": "GLTF_SceneRootNode"
+      "name": "164f3ef3a5354d2d99363d985d381246.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
     },
     {
       "children": [
         4
       ],
       "matrix": [
-        2.6330158710479736,
+        101.0,
         0.0,
         0.0,
         0.0,
         0.0,
-        2.6330158710479736,
+        -1.6454988618574973e-05,
+        -100.99999999999866,
         0.0,
         0.0,
-        0.0,
-        0.0,
-        2.6330158710479736,
+        100.99999999999866,
+        -1.6454988618574973e-05,
         0.0,
         0.0,
         0.0,
         0.0,
         1.0
       ],
-      "name": "Sphere_2"
+      "name": "Sphere"
     },
     {
       "mesh": 0,
-      "name": "Object_4"
+      "name": "Sphere_Material_0"
     }
   ],
   "samplers": [

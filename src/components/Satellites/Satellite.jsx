@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
 export default function Satellite({ earthRef }) {
-  const { nodes, materials } = useGLTF('/satellite.gltf')
+  const { nodes, materials } = useGLTF('/models/satellite.gltf')
   const satelliteRef = useRef();
 
   // Define orbit parameters

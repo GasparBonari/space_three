@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Deimos({ marsRef }) {
-  const { nodes, materials } = useGLTF('/deimos.gltf');
+  const { nodes, materials } = useGLTF('/models/deimos.gltf');
   const deimosRef = useRef();
 
   // Deimos orbit parameters

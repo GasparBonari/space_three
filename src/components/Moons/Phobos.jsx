@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Phobos({ marsRef }) {
-  const { nodes, materials } = useGLTF('/phobos.gltf');
+  const { nodes, materials } = useGLTF('/models/phobos.gltf');
   const phobosRef = useRef();
 
   // Phobos orbit parameters

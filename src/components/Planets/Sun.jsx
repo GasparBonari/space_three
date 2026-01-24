@@ -4,7 +4,7 @@ import { useFrame } from '@react-three/fiber';
 
 export default function Sun(props) {
   const sunRef = React.useRef()
-  const { nodes, materials, animations } = useGLTF('/sun.gltf')
+  const { nodes, materials, animations } = useGLTF('/models/sun.gltf')
   const { actions } = useAnimations(animations, sunRef)
 
   useFrame((_, delta) => {

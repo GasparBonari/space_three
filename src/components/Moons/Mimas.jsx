@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Mimas({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/Mimas.glb');
+  const { nodes, materials } = useGLTF('/models/Mimas.glb');
   const mimasRef = useRef();
 
   // Orbit parameters

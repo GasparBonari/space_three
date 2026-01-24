@@ -211,13 +211,13 @@
   ],
   "images": [
     {
-      "uri": "textures/Clouds_baseColor.png"
+      "uri": "../textures/Clouds_baseColor.png"
     },
     {
-      "uri": "textures/Clouds_transmission.png"
+      "uri": "../textures/Clouds_transmission.png"
     },
     {
-      "uri": "textures/Titan_baseColor.png"
+      "uri": "../textures/Titan_baseColor.png"
     }
   ],
   "materials": [

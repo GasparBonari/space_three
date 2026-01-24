@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 export default function Earth(props) {
-  const { nodes, materials } = useGLTF('/earth.gltf')
+  const { nodes, materials } = useGLTF('/models/earth.gltf')
   const earthRef = useRef()
 
   useFrame((_, delta) => {

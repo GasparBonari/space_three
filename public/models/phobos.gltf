@@ -3,166 +3,144 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 2143,
+      "count": 16449,
       "max": [
-        50.0,
-        50.0,
-        50.0
+        12.054115295410156,
+        10.538873672485352,
+        12.80151653289795
       ],
       "min": [
-        -50.0,
-        -50.0,
-        -50.0
+        -12.317031860351563,
+        -9.982095718383789,
+        -14.236000061035156
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 25716,
+      "byteOffset": 197388,
       "componentType": 5126,
-      "count": 2143,
+      "count": 16449,
       "max": [
-        1.0,
-        1.0,
-        1.0
+        0.9998856782913208,
+        0.9999152421951294,
+        0.9990628957748413
       ],
       "min": [
-        -1.0,
-        -1.0,
-        -1.0
+        -0.999956488609314,
+        -0.9999744892120361,
+        -0.9949032068252563
       ],
       "type": "VEC3"
     },
     {
-      "bufferView": 3,
-      "componentType": 5126,
-      "count": 2143,
-      "max": [
-        1.0,
-        1.0,
-        0.024549441412091255,
-        1.0
-      ],
-      "min": [
-        -1.0,
-        -1.0,
-        -0.024549495428800583,
-        1.0
-      ],
-      "type": "VEC4"
-    },
-    {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 2143,
+      "count": 16449,
       "max": [
-        0.9999994039535522,
-        1.0
+        0.979988694190979,
+        0.9817769527435303
       ],
       "min": [
-        0.0,
-        -2.384185791015625e-07
+        0.020011335611343384,
+        0.018488764762878418
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 11904,
+      "count": 96120,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "SebastianSosnowski (https://sketchfab.com/SebastianSosnowski)",
+      "author": "BescGuy (https://sketchfab.com/BescGuy)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/callisto-moon-459125fd885f4539ac423b6c3795a297",
-      "title": "Callisto (moon)"
+      "source": "https://sketchfab.com/3d-models/phobos-1-1000-a3acffcf706a4efead044ad623e94443",
+      "title": "Phobos_1_1000"
     },
-    "generator": "Sketchfab-12.68.0",
+    "generator": "Sketchfab-15.53.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 47616,
+      "byteLength": 384480,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 17144,
-      "byteOffset": 47616,
+      "byteLength": 131592,
+      "byteOffset": 384480,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 51432,
-      "byteOffset": 64760,
+      "byteLength": 394776,
+      "byteOffset": 516072,
       "byteStride": 12,
-      "name": "floatBufferViews",
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 34288,
-      "byteOffset": 116192,
-      "byteStride": 16,
       "name": "floatBufferViews",
       "target": 34962
     }
   ],
   "buffers": [
     {
-      "byteLength": 150480,
-      "uri": "callisto.bin"
+      "byteLength": 910848,
+      "uri": "phobos.bin"
     }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_specular"
   ],
   "images": [
     {
-      "uri": "textures/callisto_1.jpeg"
+      "uri": "../textures/phobos_tex_01_baseColor.png"
     },
     {
-      "uri": "textures/callisto_2.png"
-    },
-    {
-      "uri": "textures/callisto_3.png"
+      "uri": "../textures/phobos_tex_01_specularf0.png"
     }
   ],
   "materials": [
     {
-      "doubleSided": true,
-      "name": "Material_25",
-      "normalTexture": {
-        "index": 2,
-        "scale": 0.475963555442059
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "specularFactor": 1.0,
+          "specularTexture": {
+            "index": 1
+          }
+        }
       },
+      "name": "phobos_tex_01",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 0
         },
-        "metallicFactor": 0.0,
-        "metallicRoughnessTexture": {
-          "index": 1
-        },
-        "roughnessFactor": 0.8346937720786288
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.9
       }
     }
   ],
   "meshes": [
     {
-      "name": "Ganimede_Material #25_0",
+      "name": "Object_0",
       "primitives": [
         {
           "attributes": {
             "NORMAL": 1,
             "POSITION": 0,
-            "TANGENT": 2,
-            "TEXCOORD_0": 3
+            "TEXCOORD_0": 2
           },
-          "indices": 4,
+          "indices": 3,
           "material": 0,
           "mode": 4
         }
@@ -198,36 +176,12 @@
       "children": [
         2
       ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        -1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "203522ccc19d4cd186d35fd3a76813d2.fbx"
+      "name": "root"
     },
     {
       "children": [
         3
       ],
-      "name": "RootNode"
-    },
-    {
-      "children": [
-        4
-      ],
       "matrix": [
         1.0,
         0.0,
@@ -235,22 +189,28 @@
         0.0,
         0.0,
         2.220446049250313e-16,
-        -1.0,
-        0.0,
-        0.0,
         1.0,
+        0.0,
+        0.0,
+        -1.0,
         2.220446049250313e-16,
         0.0,
-        -3.6733946800231934,
         0.0,
-        4.312246799468994,
+        0.0,
+        0.0,
         1.0
       ],
-      "name": "Ganimede"
+      "name": "GLTF_SceneRootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "phobos_0"
     },
     {
       "mesh": 0,
-      "name": "Ganimede_Material #25_0"
+      "name": "Object_4"
     }
   ],
   "samplers": [
@@ -278,10 +238,6 @@
     {
       "sampler": 0,
       "source": 1
-    },
-    {
-      "sampler": 0,
-      "source": 2
     }
   ]
 }

@@ -111,7 +111,7 @@
   ],
   "images": [
     {
-      "uri": "textures/deimos_texture.jpeg"
+      "uri": "../textures/deimos_texture.jpeg"
     }
   ],
   "materials": [

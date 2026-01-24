@@ -664,10 +664,10 @@
   ],
   "images": [
     {
-      "uri": "textures/Mat.1_baseColor.png"
+      "uri": "../textures/Mat.1_baseColor.png"
     },
     {
-      "uri": "textures/material_baseColor.png"
+      "uri": "../textures/material_baseColor.png"
     }
   ],
   "materials": [

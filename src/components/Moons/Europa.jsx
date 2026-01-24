@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Europa({ jupiterRef }) {
-  const { scene } = useGLTF('./europa.glb');
+  const { scene } = useGLTF('./models/europa.glb');
   const europaRef = useRef();
   
   const orbitRadius = 3.5; // Radius of the orbit

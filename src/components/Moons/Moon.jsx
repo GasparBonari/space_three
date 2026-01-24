@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
 export default function Moon({ earthRef }) {
-  const { nodes, materials } = useGLTF('/moon.gltf');
+  const { nodes, materials } = useGLTF('/models/moon.gltf');
   const moonRef = useRef();
 
   // Define orbit parameters for the Moon

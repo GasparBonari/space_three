@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 export default function Saturn(props) {
-  const { nodes, materials } = useGLTF('/saturn.gltf')
+  const { nodes, materials } = useGLTF('/models/saturn.gltf')
   const saturnRef = useRef();
 
   useFrame((_, delta) => {

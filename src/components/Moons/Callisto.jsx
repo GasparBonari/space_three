@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
 export default function Callisto({ jupiterRef }) {
-  const { nodes, materials } = useGLTF('/callisto.gltf')
+  const { nodes, materials } = useGLTF('/models/callisto.gltf')
   const callistoRef = useRef();
   
   const orbitRadius = 6; // Radius of the orbit

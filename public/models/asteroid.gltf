@@ -122,13 +122,13 @@
   ],
   "images": [
     {
-      "uri": "textures/Asteroid_01_baseColor.png"
+      "uri": "../textures/Asteroid_01_baseColor.png"
     },
     {
-      "uri": "textures/Asteroid_01_metallicRoughness.png"
+      "uri": "../textures/Asteroid_01_metallicRoughness.png"
     },
     {
-      "uri": "textures/Asteroid_01_normal.png"
+      "uri": "../textures/Asteroid_01_normal.png"
     }
   ],
   "materials": [

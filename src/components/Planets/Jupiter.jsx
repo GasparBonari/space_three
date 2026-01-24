@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 export default function Jupiter(props) {
-  const { nodes, materials } = useGLTF('/jupiter.gltf')
+  const { nodes, materials } = useGLTF('/models/jupiter.gltf')
   const jupiterRef = useRef();
 
   useFrame((_, delta) => {

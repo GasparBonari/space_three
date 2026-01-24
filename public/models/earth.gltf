@@ -570,16 +570,16 @@
   ],
   "images": [
     {
-      "uri": "textures/Earth_baseColor.png"
+      "uri": "../textures/Earth_baseColor.png"
     },
     {
-      "uri": "textures/Earth_metallicRoughness.png"
+      "uri": "../textures/Earth_metallicRoughness.png"
     },
     {
-      "uri": "textures/Earth_emissive.png"
+      "uri": "../textures/Earth_emissive.png"
     },
     {
-      "uri": "textures/Earth_normal.png"
+      "uri": "../textures/Earth_normal.png"
     }
   ],
   "materials": [

@@ -3,130 +3,156 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 16449,
+      "count": 11474,
       "max": [
-        12.054115295410156,
-        10.538873672485352,
-        12.80151653289795
+        99.97806549072266,
+        99.95613861083984,
+        100.0
       ],
       "min": [
-        -12.317031860351563,
-        -9.982095718383789,
-        -14.236000061035156
+        -99.97806549072266,
+        -99.95613861083984,
+        -100.0
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 197388,
+      "byteOffset": 137688,
       "componentType": 5126,
-      "count": 16449,
+      "count": 11474,
       "max": [
-        0.9998856782913208,
-        0.9999152421951294,
-        0.9990628957748413
+        0.9997259974479675,
+        0.999955415725708,
+        0.9997806549072266
       ],
       "min": [
-        -0.999956488609314,
-        -0.9999744892120361,
-        -0.9949032068252563
+        -0.9999006986618042,
+        -0.999955415725708,
+        -0.9997806549072266
       ],
       "type": "VEC3"
     },
     {
-      "bufferView": 1,
+      "bufferView": 3,
       "componentType": 5126,
-      "count": 16449,
+      "count": 11474,
       "max": [
-        0.979988694190979,
-        0.9817769527435303
+        1.0,
+        0.9997807741165161,
+        0.0064263371750712395,
+        1.0
       ],
       "min": [
-        0.020011335611343384,
-        0.018488764762878418
+        -1.0,
+        -0.9999967217445374,
+        -0.006654226686805487,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 11474,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 96120,
+      "count": 66600,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "BescGuy (https://sketchfab.com/BescGuy)",
+      "author": "uperesito (https://sketchfab.com/uperesito)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/phobos-1-1000-a3acffcf706a4efead044ad623e94443",
-      "title": "Phobos_1_1000"
+      "source": "https://sketchfab.com/3d-models/io-v11-24eff42e8ac2429a945fddd722f4ef5c",
+      "title": "Io v1.1"
     },
-    "generator": "Sketchfab-15.53.0",
+    "generator": "Sketchfab-12.68.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 384480,
+      "byteLength": 266400,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 131592,
-      "byteOffset": 384480,
+      "byteLength": 91792,
+      "byteOffset": 266400,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 394776,
-      "byteOffset": 516072,
+      "byteLength": 275376,
+      "byteOffset": 358192,
       "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 183584,
+      "byteOffset": 633568,
+      "byteStride": 16,
       "name": "floatBufferViews",
       "target": 34962
     }
   ],
   "buffers": [
     {
-      "byteLength": 910848,
-      "uri": "phobos.bin"
+      "byteLength": 817152,
+      "uri": "io.bin"
     }
-  ],
-  "extensionsUsed": [
-    "KHR_materials_specular"
   ],
   "images": [
     {
-      "uri": "textures/phobos_tex_01_baseColor.png"
+      "uri": "../textures/io_3.jpeg"
     },
     {
-      "uri": "textures/phobos_tex_01_specularf0.png"
+      "uri": "../textures/io_1.jpeg"
+    },
+    {
+      "uri": "../textures/io_2.png"
     }
   ],
   "materials": [
     {
-      "extensions": {
-        "KHR_materials_specular": {
-          "specularColorFactor": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "specularFactor": 1.0,
-          "specularTexture": {
-            "index": 1
-          }
-        }
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "emissiveTexture": {
+        "index": 1
       },
-      "name": "phobos_tex_01",
+      "name": "material",
+      "normalTexture": {
+        "index": 2,
+        "scale": 0.23951981707317074
+      },
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 0
         },
-        "metallicFactor": 0.5,
-        "roughnessFactor": 0.9
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
       }
     }
   ],
@@ -138,9 +164,10 @@
           "attributes": {
             "NORMAL": 1,
             "POSITION": 0,
-            "TEXCOORD_0": 2
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
           },
-          "indices": 3,
+          "indices": 4,
           "material": 0,
           "mode": 4
         }
@@ -176,41 +203,11 @@
       "children": [
         2
       ],
-      "name": "root"
-    },
-    {
-      "children": [
-        3
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
-        1.0,
-        0.0,
-        0.0,
-        -1.0,
-        2.220446049250313e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "GLTF_SceneRootNode"
-    },
-    {
-      "children": [
-        4
-      ],
-      "name": "phobos_0"
+      "name": "Geode"
     },
     {
       "mesh": 0,
-      "name": "Object_4"
+      "name": "Object_2"
     }
   ],
   "samplers": [
@@ -238,6 +235,10 @@
     {
       "sampler": 0,
       "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
     }
   ]
 }

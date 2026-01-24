@@ -3,31 +3,31 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 2143,
+      "count": 1085,
       "max": [
-        10.0,
-        10.0,
-        10.0
+        47.091068267822266,
+        47.184165954589844,
+        47.18416976928711
       ],
       "min": [
-        -10.0,
-        -10.0,
-        -10.0
+        -47.091064453125,
+        -47.184165954589844,
+        -47.18416976928711
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 25716,
+      "byteOffset": 13020,
       "componentType": 5126,
-      "count": 2143,
+      "count": 1085,
       "max": [
-        1.0,
+        0.9980338215827942,
         1.0,
         1.0
       ],
       "min": [
-        -1.0,
+        -0.9980338215827942,
         -1.0,
         -1.0
       ],
@@ -36,99 +36,149 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 2143,
+      "count": 1085,
       "max": [
-        0.9999994039535522,
+        0.9901543855667114,
         1.0
       ],
       "min": [
-        0.0,
-        -2.384185791015625e-07
+        -0.20000004768371582,
+        0.0
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 11904,
+      "count": 6000,
       "type": "SCALAR"
     },
     {
       "bufferView": 2,
-      "byteOffset": 51432,
+      "byteOffset": 26040,
       "componentType": 5126,
-      "count": 2143,
+      "count": 1540,
       "max": [
-        10.0,
-        10.0,
-        10.0
+        50.836219787597656,
+        52.06293487548828,
+        50.83622360229492
       ],
       "min": [
-        -10.0,
-        -10.0,
-        -10.0
+        -50.83623123168945,
+        -52.01644515991211,
+        -50.83622360229492
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 77148,
+      "byteOffset": 44520,
       "componentType": 5126,
-      "count": 2143,
+      "count": 1540,
       "max": [
-        1.0,
-        1.0,
+        0.9999995827674866,
+        0.9962051510810852,
         1.0
       ],
       "min": [
-        -1.0,
-        -1.0,
+        -0.9999995827674866,
+        -0.9991138577461243,
         -1.0
       ],
       "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 8680,
+      "componentType": 5126,
+      "count": 1540,
+      "max": [
+        0.9917857646942139,
+        1.0
+      ],
+      "min": [
+        -0.20000004768371582,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 63000,
+      "componentType": 5126,
+      "count": 1540,
+      "max": [
+        1.1444091796875e-05,
+        3.5611538887023926,
+        7.62939453125e-06
+      ],
+      "min": [
+        -1.1444091796875e-05,
+        -3.498145580291748,
+        -1.1444091796875e-05
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 81480,
+      "componentType": 5126,
+      "count": 1540,
+      "max": [
+        0.44943320751190186,
+        0.2980404794216156,
+        0.45835649967193604
+      ],
+      "min": [
+        -0.4306580722332001,
+        -0.2876964807510376,
+        -0.49129748344421387
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 99960,
+      "componentType": 5126,
+      "count": 1540,
+      "max": [
+        2.768575668334961,
+        3.5611538887023926,
+        9.5367431640625e-06
+      ],
+      "min": [
+        -2.9241418838500977,
+        -3.498145580291748,
+        -1.1444091796875e-05
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 118440,
+      "componentType": 5126,
+      "count": 1540,
+      "max": [
+        0.4407782554626465,
+        0.4421740770339966,
+        0.6000102162361145
+      ],
+      "min": [
+        -0.47600802779197693,
+        -0.3982328772544861,
+        -0.5599061846733093
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 24000,
+      "componentType": 5125,
+      "count": 8640,
+      "type": "SCALAR"
     },
     {
       "bufferView": 3,
-      "componentType": 5126,
-      "count": 2143,
-      "max": [
-        1.0,
-        1.0,
-        0.024549409747123718,
-        1.0
-      ],
-      "min": [
-        -1.0,
-        -1.0,
-        -0.02454940602183342,
-        1.0
-      ],
-      "type": "VEC4"
-    },
-    {
-      "bufferView": 1,
-      "byteOffset": 17144,
-      "componentType": 5126,
-      "count": 2143,
-      "max": [
-        0.9999994039535522,
-        1.0
-      ],
-      "min": [
-        0.0,
-        -2.384185791015625e-07
-      ],
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 0,
-      "byteOffset": 47616,
-      "componentType": 5125,
-      "count": 11904,
-      "type": "SCALAR"
-    },
-    {
-      "bufferView": 4,
       "componentType": 5126,
       "count": 101,
       "max": [
@@ -140,25 +190,25 @@
       "type": "SCALAR"
     },
     {
-      "bufferView": 5,
+      "bufferView": 4,
       "componentType": 5126,
       "count": 101,
       "max": [
-        0.48404785990715027,
-        0.7071067690849304,
-        0.7071067690849304,
-        0.7071067690849304
+        0.769420862197876,
+        0.7694209218025208,
+        1.0,
+        1.0
       ],
       "min": [
-        -0.7071067690849304,
-        -0.5,
-        -0.5,
-        -0.48404785990715027
+        -0.7208394408226013,
+        -0.6831962466239929,
+        -0.6282462477684021,
+        -0.4695484936237335
       ],
       "type": "VEC4"
     },
     {
-      "bufferView": 4,
+      "bufferView": 3,
       "byteOffset": 404,
       "componentType": 5126,
       "count": 101,
@@ -171,23 +221,17 @@
       "type": "SCALAR"
     },
     {
-      "bufferView": 5,
-      "byteOffset": 1616,
+      "bufferView": 3,
+      "byteOffset": 808,
       "componentType": 5126,
-      "count": 101,
+      "count": 202,
       "max": [
-        0.4840480089187622,
-        0.7071067690849304,
-        0.7071067690849304,
-        0.7071067690849304
+        1.0
       ],
       "min": [
-        -0.7071067690849304,
-        -0.4840480089187622,
-        -0.4840480089187622,
-        -0.4840480089187622
+        0.0
       ],
-      "type": "VEC4"
+      "type": "SCALAR"
     }
   ],
   "animations": [
@@ -196,163 +240,131 @@
         {
           "sampler": 0,
           "target": {
-            "node": 4,
+            "node": 6,
             "path": "rotation"
           }
         },
         {
           "sampler": 1,
           "target": {
-            "node": 6,
-            "path": "rotation"
+            "node": 7,
+            "path": "weights"
           }
         }
       ],
-      "name": "Planetary and Clouds rotation",
+      "name": "Take 001",
       "samplers": [
         {
-          "input": 9,
+          "input": 12,
           "interpolation": "LINEAR",
-          "output": 10
+          "output": 13
         },
         {
-          "input": 11,
+          "input": 14,
           "interpolation": "LINEAR",
-          "output": 12
+          "output": 15
         }
       ]
     }
   ],
   "asset": {
     "extras": {
-      "author": "SebastianSosnowski (https://sketchfab.com/SebastianSosnowski)",
+      "author": "P3TroV (https://sketchfab.com/P3TroV)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/neptune-fe05e06a265d4a8f9285d34c933878ee",
-      "title": "Neptune"
+      "source": "https://sketchfab.com/3d-models/sun-animated-test-8c3ebc78ec014042a61144f46c6f13fa",
+      "title": "Sun animated test"
     },
-    "generator": "Sketchfab-13.47.0",
+    "generator": "Sketchfab-12.68.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 95232,
+      "byteLength": 58560,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 34288,
-      "byteOffset": 95232,
+      "byteLength": 21000,
+      "byteOffset": 58560,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 102864,
-      "byteOffset": 129520,
+      "byteLength": 136920,
+      "byteOffset": 79560,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 34288,
-      "byteOffset": 232384,
-      "byteStride": 16,
-      "name": "floatBufferViews",
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 808,
-      "byteOffset": 266672,
+      "byteLength": 1616,
+      "byteOffset": 216480,
       "name": "floatBufferViews"
     },
     {
       "buffer": 0,
-      "byteLength": 3232,
-      "byteOffset": 267480,
+      "byteLength": 1616,
+      "byteOffset": 218096,
       "byteStride": 16,
       "name": "floatBufferViews"
     }
   ],
   "buffers": [
     {
-      "byteLength": 270712,
-      "uri": "neptune.bin"
+      "byteLength": 219712,
+      "uri": "sun.bin"
     }
   ],
   "images": [
     {
-      "uri": "textures/neptune_1.jpeg"
-    },
-    {
-      "uri": "textures/neptune_2.png"
-    },
-    {
-      "uri": "textures/neptune_3.png"
-    },
-    {
-      "uri": "textures/neptune_4.png"
-    },
-    {
-      "uri": "textures/neptune_5.png"
+      "uri": "../textures/sun.jpeg"
     }
   ],
   "materials": [
     {
-      "name": "Planeta",
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.4026331274591854,
+        0.07639120027303546,
+        0.0
+      ],
+      "name": "01_-_Default",
       "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          0.7151295731707318,
-          0.7151295731707318,
-          0.7151295731707318,
-          1.0
-        ],
         "baseColorTexture": {
           "index": 0
         },
         "metallicFactor": 0.0,
-        "metallicRoughnessTexture": {
-          "index": 1
-        },
-        "roughnessFactor": 0.8736661585365854
+        "roughnessFactor": 0.8929713596
       }
     },
     {
       "alphaMode": "BLEND",
+      "doubleSided": true,
       "emissiveFactor": [
-        0.0013906462153668309,
-        0.00082500562137957,
-        0.11647437287666725
+        0.5068979444783738,
+        0.3494173294716473,
+        0.0014352328475523558
       ],
-      "name": "Atmosfera",
-      "normalTexture": {
-        "index": 4,
-        "scale": 0.07488567073170732
-      },
+      "name": "02_-_Default",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.3858612804878049,
-          0.3858612804878049,
-          0.3858612804878049,
-          0.23951981707317074
+          0.623529,
+          0.470588,
+          0.0,
+          0.1107575850053267
         ],
-        "baseColorTexture": {
-          "index": 2
-        },
-        "metallicFactor": 0.0,
-        "metallicRoughnessTexture": {
-          "index": 3
-        }
+        "metallicFactor": 0.0
       }
     }
   ],
   "meshes": [
     {
-      "name": "Planeta_Planeta_0",
+      "name": "GeoSphere001_01 - Default_0",
       "primitives": [
         {
           "attributes": {
@@ -367,19 +379,32 @@
       ]
     },
     {
-      "name": "Atmosfera_Atmosfera_0",
+      "name": "0",
       "primitives": [
         {
           "attributes": {
             "NORMAL": 5,
             "POSITION": 4,
-            "TANGENT": 6,
-            "TEXCOORD_0": 7
+            "TEXCOORD_0": 6
           },
-          "indices": 8,
+          "indices": 11,
           "material": 1,
-          "mode": 4
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 8,
+              "POSITION": 7
+            },
+            {
+              "NORMAL": 10,
+              "POSITION": 9
+            }
+          ]
         }
+      ],
+      "weights": [
+        0.0,
+        0.0
       ]
     }
   ],
@@ -389,17 +414,17 @@
         1
       ],
       "matrix": [
-        1.0,
+        0.021695293486118317,
         0.0,
         0.0,
         0.0,
         0.0,
-        2.220446049250313e-16,
-        -1.0,
+        4.817322870857747e-18,
+        -0.021695293486118317,
         0.0,
         0.0,
-        1.0,
-        2.220446049250313e-16,
+        0.021695293486118317,
+        4.817322870857747e-18,
         0.0,
         0.0,
         0.0,
@@ -418,8 +443,9 @@
         0.0,
         0.0,
         0.0,
+        -1.0,
         0.0,
-        1.0,
+        0.0,
         0.0,
         0.0,
         -1.0,
@@ -427,10 +453,9 @@
         0.0,
         0.0,
         0.0,
-        0.0,
         1.0
       ],
-      "name": "943e82ae1e91464bb6057ce325b1063b.fbx"
+      "name": "23c71f95b90948a0bb8746260230a45e.fbx"
     },
     {
       "children": [
@@ -449,38 +474,26 @@
       "children": [
         5
       ],
-      "name": "Planeta",
-      "rotation": [
-        -0.7071068286895752,
-        -0.0,
-        0.0,
-        0.7071068286895752
-      ]
+      "name": "GeoSphere001"
     },
     {
       "mesh": 0,
-      "name": "Planeta_Planeta_0"
+      "name": "GeoSphere001_01 - Default_0"
     },
     {
       "children": [
         7
       ],
-      "name": "Atmosfera",
-      "rotation": [
-        -0.7071068286895752,
-        -0.0,
-        0.0,
-        0.7071068286895752
-      ],
+      "name": "GeoSphere002",
       "scale": [
-        1.0049999952316284,
-        1.0049999952316284,
-        1.0049999952316284
+        0.9640802145004272,
+        0.9640802145004272,
+        0.9640802145004272
       ]
     },
     {
       "mesh": 1,
-      "name": "Atmosfera_Atmosfera_0"
+      "name": "0"
     }
   ],
   "samplers": [
@@ -504,22 +517,6 @@
     {
       "sampler": 0,
       "source": 0
-    },
-    {
-      "sampler": 0,
-      "source": 1
-    },
-    {
-      "sampler": 0,
-      "source": 2
-    },
-    {
-      "sampler": 0,
-      "source": 3
-    },
-    {
-      "sampler": 0,
-      "source": 4
     }
   ]
 }

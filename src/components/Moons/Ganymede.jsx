@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
 export default function Ganymede({ jupiterRef }) {
-  const { nodes, materials } = useGLTF('/ganymede.gltf')
+  const { nodes, materials } = useGLTF('/models/ganymede.gltf')
   const ganymedeRef = useRef();
   
   const orbitRadius = 5; // Radius of the orbit

@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Rhea({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/Rhea.glb');
+  const { nodes, materials } = useGLTF('/models/Rhea.glb');
   const rheaRef = useRef();
 
   // Orbit parameters

@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Tethys({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/Tethys.glb');
+  const { nodes, materials } = useGLTF('/models/Tethys.glb');
   const tethysRef = useRef();
 
   // Orbit parameters

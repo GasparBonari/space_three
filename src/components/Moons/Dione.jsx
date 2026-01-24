@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Dione({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/Dione.glb');
+  const { nodes, materials } = useGLTF('/models/Dione.glb');
   const dioneRef = useRef();
 
   // Orbit parameters

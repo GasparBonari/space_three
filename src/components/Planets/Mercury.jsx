@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 export default function Mercury(props) {
-  const { nodes, materials } = useGLTF('/mercury.gltf')
+  const { nodes, materials } = useGLTF('/models/mercury.gltf')
   const mercuryRef = useRef();
 
   useFrame((_, delta) => {

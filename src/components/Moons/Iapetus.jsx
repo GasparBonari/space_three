@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Iapetus({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/Iapetus.glb');
+  const { nodes, materials } = useGLTF('/models/Iapetus.glb');
   const iapetusRef = useRef();
 
   // Orbit parameters

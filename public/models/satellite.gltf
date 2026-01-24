@@ -2069,16 +2069,16 @@
   ],
   "images": [
     {
-      "uri": "textures/Satellite_normal.jpeg"
+      "uri": "../textures/Satellite_normal.jpeg"
     },
     {
-      "uri": "textures/Solar_Panel_baseColor.jpeg"
+      "uri": "../textures/Solar_Panel_baseColor.jpeg"
     },
     {
-      "uri": "textures/Solar_Panel_metallicRoughness.png"
+      "uri": "../textures/Solar_Panel_metallicRoughness.png"
     },
     {
-      "uri": "textures/Solar_Panel_normal.jpeg"
+      "uri": "../textures/Solar_Panel_normal.jpeg"
     }
   ],
   "materials": [

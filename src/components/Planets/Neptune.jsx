@@ -3,7 +3,7 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 
 export default function Neptune(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/neptune.gltf')
+  const { nodes, materials, animations } = useGLTF('/models/neptune.gltf')
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {

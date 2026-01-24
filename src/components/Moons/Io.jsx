@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
 export default function Io({ jupiterRef }) {
-  const { nodes, materials } = useGLTF('/io.gltf')
+  const { nodes, materials } = useGLTF('/models/io.gltf')
   const ioRef = useRef();
   
   const orbitRadius = 2.5; // Radius of the orbit

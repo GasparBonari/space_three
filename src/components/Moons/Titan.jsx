@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Titan({ saturnRef }) {
-  const { nodes, materials } = useGLTF('/titan.gltf');
+  const { nodes, materials } = useGLTF('/models/titan.gltf');
   const titanRef = useRef();
 
   // Titan orbit parameters

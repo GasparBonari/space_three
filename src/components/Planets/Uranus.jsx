@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
 export default function Uranus(props) {
-  const { nodes, materials } = useGLTF('/uranus.gltf')
+  const { nodes, materials } = useGLTF('/models/uranus.gltf')
   const uranusRef = useRef();
 
   useFrame((_, delta) => {

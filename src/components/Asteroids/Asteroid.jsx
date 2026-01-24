@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 export default function Asteroid(props) {
-    const { nodes, materials } = useGLTF('/asteroid.gltf');
+    const { nodes, materials } = useGLTF('/models/asteroid.gltf');
     const asteroidRef = useRef();
     const speed = props.speed;
     const planetPosition = props.planetPosition;
