@@ -38,12 +38,17 @@
 }
 
 .info-panel__badge {
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #9be7ff 0%, #2b9cff 40%, #0f3f8a 100%);
-  box-shadow: 0 6px 18px rgba(40,140,255,0.18), 0 0 10px rgba(35,140,255,0.06) inset;
+  overflow: hidden;
+  display: inline-block;
+  background: transparent;
 }
+
+.info-panel__badge canvas { background: transparent !important; }
+
+.info-panel__badge canvas { width: 100% !important; height: 100% !important; display: block; }
 
 .info-panel__title {
   margin: 0;
