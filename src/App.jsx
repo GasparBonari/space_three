@@ -20,6 +20,7 @@ import EarthModels from './components/PlanetModels/EarthModels';
 import MarsModels from './components/PlanetModels/MarsModels';
 import JupiterModels from './components/PlanetModels/JupiterModels';
 import SaturnModels from './components/PlanetModels/SaturnModels';
+import InfoPanel from './components/UI/InfoPanel';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -61,6 +62,7 @@ const Planet = React.forwardRef(({ radius, speed, initialAngle, children, ...pro
 export default function App() {
   const [planetIndex, setPlanetIndex] = useState(2); // Track which planet camera should follow
   const [isZoomed, setIsZoomed] = useState(false);
+  const [selectedPlanet, setSelectedPlanet] = useState(null);
   const numAsteroids = 50;
 
   // Create planet objects with a ref for each
@@ -95,10 +97,17 @@ export default function App() {
   const handlePlanetClick = (index) => {
     if (planetIndex === index) {
       setIsZoomed((prevZoom) => !prevZoom);  // Toggle zoom when clicking the same planet
+      setSelectedPlanet((prev) => (prev === index ? null : index));
     } else {
       setPlanetIndex(index);  // Switch to the clicked planet
       setIsZoomed(true);      // Zoom in on the new planet
+      setSelectedPlanet(index);
     }
+  };
+
+  const closeInfoPanel = () => {
+    setSelectedPlanet(null);
+    setIsZoomed(false);
   };
 
   // Create an array to store asteroid objects
@@ -181,6 +190,14 @@ export default function App() {
         {/* Camera controller to follow planets */}
         <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} />
       </Canvas>
+
+      {/* Info HUD overlay */}
+      {selectedPlanet !== null && (
+        <InfoPanel
+          planet={{ ...planets[selectedPlanet], index: selectedPlanet }}
+          onClose={closeInfoPanel}
+        />
+      )}
     </>
   );
 }

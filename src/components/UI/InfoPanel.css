@@ -1,0 +1,84 @@
+.info-panel {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  width: 340px;
+  z-index: 60;
+  pointer-events: auto;
+}
+
+.info-panel__inner {
+  background: linear-gradient(135deg, rgba(25,26,40,0.6), rgba(10,12,20,0.55));
+  border: 1px solid rgba(100,150,255,0.12);
+  box-shadow: 0 8px 30px rgba(5,10,20,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  padding: 18px;
+  border-radius: 12px;
+  color: #e6f0ff;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.info-panel__close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  color: #a8c6ff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.info-panel__header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.info-panel__badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9be7ff 0%, #2b9cff 40%, #0f3f8a 100%);
+  box-shadow: 0 6px 18px rgba(40,140,255,0.18), 0 0 10px rgba(35,140,255,0.06) inset;
+}
+
+.info-panel__title {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+}
+
+.info-panel__subtitle {
+  margin: 0;
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(166,190,255,0.85);
+}
+
+.info-panel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(120,160,255,0.06);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.card__label { font-size: 11px; color: rgba(170,190,230,0.9); }
+.card__value { font-size: 14px; font-weight: 600; margin-top: 6px; }
+
+.info-panel__actions { display: flex; gap: 8px; margin-top: 12px; }
+.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(140,160,255,0.06); background: rgba(255,255,255,0.02); color: #dfeeff; cursor: pointer; }
+.btn--primary { background: linear-gradient(90deg,#3ea0ff,#6ff0c3); color: #042033; font-weight: 700; border: none; }
+
+@media (max-width: 600px) {
+  .info-panel { left: 12px; right: 12px; top: 12px; width: auto; }
+}
