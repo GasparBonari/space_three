@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
@@ -65,21 +65,27 @@ export default function App() {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const numAsteroids = 50;
 
-  // Create planet objects with a ref for each
+  const planetRefs = useRef([]);
+  if (planetRefs.current.length === 0) {
+    for (let i = 0; i < 8; i++) {
+      planetRefs.current.push(React.createRef());
+    }
+  }
+
   const planets = [
-    { name: 'Mercury', radius: 10, speed: 0.3, initialAngle: 0, ref: useRef(), zoomDistance: 2 },  // Small planet, closer zoom
-    { name: 'Venus', radius: 20, speed: 0.2, initialAngle: Math.PI / 2, ref: useRef(), zoomDistance: 3 },
-    { name: 'Earth', radius: 25, speed: 0.1, initialAngle: Math.PI, ref: useRef(), zoomDistance: 2 }, // Slightly farther zoom
-    { name: 'Mars', radius: 35, speed: 0.08, initialAngle: Math.PI * 1.5, ref: useRef(), zoomDistance: 2 },
-    { name: 'Jupiter', radius: 50, speed: 0.05, initialAngle: 0, ref: useRef(), zoomDistance: 3 }, // Largest planet, farther zoom
-    { name: 'Saturn', radius: 60, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: useRef(), zoomDistance: 5 },
-    { name: 'Uranus', radius: 65, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 8 },
-    { name: 'Neptune', radius: 80, speed: 0.04, initialAngle: Math.PI * (5 / 4), ref: useRef(), zoomDistance: 10 },
+    { name: 'Mercury', radius: 15, speed: 0.3, initialAngle: 0, ref: planetRefs.current[0], zoomDistance: 2 },
+    { name: 'Venus', radius: 30, speed: 0.2, initialAngle: Math.PI / 2, ref: planetRefs.current[1], zoomDistance: 3 },
+    { name: 'Earth', radius: 40, speed: 0.1, initialAngle: Math.PI, ref: planetRefs.current[2], zoomDistance: 2 },
+    { name: 'Mars', radius: 55, speed: 0.08, initialAngle: Math.PI * 1.5, ref: planetRefs.current[3], zoomDistance: 2 },
+    { name: 'Jupiter', radius: 80, speed: 0.05, initialAngle: 0, ref: planetRefs.current[4], zoomDistance: 3 },
+    { name: 'Saturn', radius: 100, speed: 0.08, initialAngle: Math.PI * (3 / 4), ref: planetRefs.current[5], zoomDistance: 5 },
+    { name: 'Uranus', radius: 120, speed: 0.08, initialAngle: Math.PI * (5 / 4), ref: planetRefs.current[6], zoomDistance: 8 },
+    { name: 'Neptune', radius: 150, speed: 0.04, initialAngle: Math.PI * (5 / 4), ref: planetRefs.current[7], zoomDistance: 10 },
   ];
 
   // Scroll handler to switch between planets
-  const scrollHandler = (event) => {
-    setIsZoomed(false)
+  const scrollHandler = useCallback((event) => {
+    setIsZoomed(false);
 
     if (event.deltaY > 0 && planetIndex < planets.length - 1) {
       const next = planetIndex + 1;
@@ -90,12 +96,12 @@ export default function App() {
       setPlanetIndex(next);
       setSelectedPlanet((prev) => (prev !== null ? next : prev));
     }
-  };
+  }, [planetIndex, planets.length]);
 
   useEffect(() => {
     window.addEventListener('wheel', scrollHandler);
     return () => window.removeEventListener('wheel', scrollHandler);
-  }, [planetIndex]);
+  }, [scrollHandler]);
 
   // Handle planet click
   const handlePlanetClick = (index) => {
@@ -115,27 +121,33 @@ export default function App() {
   };
 
   // Create an array to store asteroid objects
-  const asteroids = Array.from({ length: numAsteroids }, (_, i) => {
-    const randomPlanetIndex = Math.floor(Math.random() * planets.length);
-    return {
-      id: i,
-      position: [-20, Math.random() * 20 - 10, Math.random() * 20 - 10],
-      speed: Math.random() * 0.1 + 0.005,
-      planetPosition: planets[randomPlanetIndex].ref.current?.position || [0, 0, 0],
-      direction: [
-        Math.random() * 2 - 1, // Random x direction
-        Math.random() * 2 - 1, // Random y direction
-        Math.random() * 2 - 1  // Random z direction
-      ]
-    };
-  });
+  const asteroids = useMemo(() => {
+    return Array.from({ length: numAsteroids }, (_, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 30 + 25; // Between the planets, not tied to specific planets
+      return {
+        id: i,
+        position: [
+          distance * Math.cos(angle),
+          Math.random() * 20 - 10,
+          distance * Math.sin(angle)
+        ],
+        speed: Math.random() * 0.1 + 0.005,
+        planetPosition: [0, 0, 0], // Solar system center, not a specific planet
+        direction: [
+          Math.random() * 2 - 1, // Random x direction
+          Math.random() * 2 - 1, // Random y direction
+          Math.random() * 2 - 1  // Random z direction
+        ]
+      };
+    });
+  }, [numAsteroids]);
 
   return (
     <>
       <Canvas camera={{ position: [0, 0, 40] }}>
-        <ambientLight intensity={0.2} />
-        {/* <directionalLight intensity={5} position={[-20, 20, 0]} /> */}
-        <pointLight position={[0, 0, 0]} intensity={1000} decay={2} distance={2000} />
+        <ambientLight intensity={0.4} />
+        <pointLight position={[0, 0, 0]} intensity={2000} decay={2} distance={4000} />
         <Suspense fallback={null}>
           {/* Sun */}
           <Sun position={[0, 0, 0]} />

@@ -29,9 +29,9 @@ export default function Asteroid(props) {
 
     useEffect(() => {
         if (asteroidRef.current) {
-          asteroidRef.current.position.copy(getInitialPosition());
+          asteroidRef.current.position.set(...props.position);
         }
-    }, []);
+    }, [props.position]);
 
     // Check collision between two bounding spheres
     function checkCollision(sphere1, sphere2) {
@@ -68,9 +68,9 @@ export default function Asteroid(props) {
           }
     
           // Reset position if the asteroid moves too far from its starting point
-          const boundary = 70; // Distance boundary
+          const boundary = 200; // Distance boundary - increased for larger solar system
           if (asteroidRef.current.position.length() > boundary) {
-            asteroidRef.current.position.copy(getInitialPosition());
+            asteroidRef.current.position.set(...props.position);
           }
         }
     });

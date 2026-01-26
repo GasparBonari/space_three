@@ -7,7 +7,7 @@ export default function Deimos({ marsRef }) {
   const deimosRef = useRef();
 
   // Deimos orbit parameters
-  const orbitRadius = 4;
+  const orbitRadius = 7;
   const orbitSpeed = 0.5;
 
   useFrame((state) => {

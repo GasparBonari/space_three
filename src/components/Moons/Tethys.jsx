@@ -7,7 +7,7 @@ export default function Tethys({ saturnRef }) {
   const tethysRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 7.5;
+  const orbitRadius = 11;
   const orbitSpeed = 0.11;
   const rotationSpeed = 0.01;
 

@@ -7,7 +7,7 @@ export default function Rhea({ saturnRef }) {
   const rheaRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 10;
+  const orbitRadius = 16;
   const orbitSpeed = 0.07;
   const rotationSpeed = 0.01;
 

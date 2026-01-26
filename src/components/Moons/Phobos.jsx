@@ -7,7 +7,7 @@ export default function Phobos({ marsRef }) {
   const phobosRef = useRef();
 
   // Phobos orbit parameters
-  const orbitRadius = 2;
+  const orbitRadius = 3.5;
   const orbitSpeed = 0.8;
 
   useFrame((state) => {

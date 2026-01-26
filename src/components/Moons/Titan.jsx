@@ -7,7 +7,7 @@ export default function Titan({ saturnRef }) {
   const titanRef = useRef();
 
   // Titan orbit parameters
-  const orbitRadius = 7; // Distance from Saturn
+  const orbitRadius = 14; // Distance from Saturn
   const orbitSpeed = 0.12; // Speed of orbit
   const rotationSpeed = 0.01; // Own axis rotation
 

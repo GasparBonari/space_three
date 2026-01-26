@@ -6,7 +6,7 @@ export default function Ganymede({ jupiterRef }) {
   const { nodes, materials } = useGLTF('/models/ganymede.gltf')
   const ganymedeRef = useRef();
   
-  const orbitRadius = 5; // Radius of the orbit
+  const orbitRadius = 9; // Radius of the orbit
   const orbitSpeed = 0.3; // Speed of the orbit
   const rotationSpeed = 0.01; // Rotation own axis
 

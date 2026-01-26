@@ -6,7 +6,7 @@ export default function Callisto({ jupiterRef }) {
   const { nodes, materials } = useGLTF('/models/callisto.gltf')
   const callistoRef = useRef();
   
-  const orbitRadius = 6; // Radius of the orbit
+  const orbitRadius = 13; // Radius of the orbit
   const orbitSpeed = 0.2; // Speed of the orbit
   const rotationSpeed = 0.01; // Rotation own axis
 

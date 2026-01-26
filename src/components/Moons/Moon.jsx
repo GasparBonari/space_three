@@ -7,7 +7,7 @@ export default function Moon({ earthRef }) {
   const moonRef = useRef();
 
   // Define orbit parameters for the Moon
-  const orbitRadius = 2.5; // Radius of the Moon's orbit
+  const orbitRadius = 4; // Radius of the Moon's orbit
   const orbitSpeed = 0.3; // Speed of the Moon's orbit (slower than the satellite)
   const rotationSpeed = 0.01; // Rotation own axis
 

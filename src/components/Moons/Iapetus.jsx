@@ -7,7 +7,7 @@ export default function Iapetus({ saturnRef }) {
   const iapetusRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 12;
+  const orbitRadius = 20;
   const orbitSpeed = 0.05;
   const rotationSpeed = 0.01;
 

@@ -6,7 +6,7 @@ export default function Europa({ jupiterRef }) {
   const { scene } = useGLTF('./models/europa.glb');
   const europaRef = useRef();
   
-  const orbitRadius = 3.5; // Radius of the orbit
+  const orbitRadius = 6; // Radius of the orbit
   const orbitSpeed = 0.4; // Speed of the orbit
   const rotationSpeed = 0.01; // Rotation own axis
 

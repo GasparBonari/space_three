@@ -7,7 +7,7 @@ export default function Enceladus({ saturnRef }) {
   const enceladusRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 8;
+  const orbitRadius = 12;
   const orbitSpeed = 0.13;
   const rotationSpeed = 0.01;
 

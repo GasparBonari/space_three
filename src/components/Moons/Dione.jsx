@@ -7,7 +7,7 @@ export default function Dione({ saturnRef }) {
   const dioneRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 9;
+  const orbitRadius = 13;
   const orbitSpeed = 0.09;
   const rotationSpeed = 0.01;
 

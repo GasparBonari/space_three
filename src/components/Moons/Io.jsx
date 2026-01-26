@@ -6,7 +6,7 @@ export default function Io({ jupiterRef }) {
   const { nodes, materials } = useGLTF('/models/io.gltf')
   const ioRef = useRef();
   
-  const orbitRadius = 2.5; // Radius of the orbit
+  const orbitRadius = 4; // Radius of the orbit
   const orbitSpeed = 0.6; // Speed of the orbit
   const rotationSpeed = 0.02; // Rotation own axis
 

@@ -7,7 +7,7 @@ export default function Mimas({ saturnRef }) {
   const mimasRef = useRef();
 
   // Orbit parameters
-  const orbitRadius = 6.5;
+  const orbitRadius = 10;
   const orbitSpeed = 0.15;
   const rotationSpeed = 0.01;
 
