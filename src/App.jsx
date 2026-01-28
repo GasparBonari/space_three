@@ -30,8 +30,8 @@ function CameraController({ planets, planetIndex, isZoomed }) {
       const planetPosition = planetRef.current.position;
       
       // Get the custom zoom distance for each planet
-      const zoomDistance = isZoomed ? planets[planetIndex].zoomDistance : 10;  // Adjust zoom distance for each planet
-      const offsetX = isZoomed ? 1 : 5;  // Offset can also be customized if needed
+      const zoomDistance = isZoomed ? planets[planetIndex].zoomDistance : 7;  // Adjust zoom distance for each planet
+      const offsetX = isZoomed ? 1 : 3;
 
       camera.position.lerp(
         {
