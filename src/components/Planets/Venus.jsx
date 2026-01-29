@@ -20,5 +20,5 @@ export default function Venus(props) {
 	)
 }
 
-useGLTF.preload('/venus.gltf')
+useGLTF.preload('/models/venus.gltf')
 

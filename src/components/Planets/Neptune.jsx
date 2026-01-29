@@ -36,4 +36,4 @@ export default function Neptune(props) {
   )
 }
 
-useGLTF.preload('/neptune.gltf')
+useGLTF.preload('/models/neptune.gltf')

@@ -29,4 +29,4 @@ export default function Enceladus({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Enceladus.glb');
+useGLTF.preload('/models/Enceladus.glb');

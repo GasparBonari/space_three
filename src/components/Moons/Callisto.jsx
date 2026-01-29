@@ -29,4 +29,4 @@ export default function Callisto({ jupiterRef }) {
   )
 }
 
-useGLTF.preload('/callisto.gltf')
+useGLTF.preload('/models/callisto.gltf')

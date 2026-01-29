@@ -30,4 +30,4 @@ export default function Io({ jupiterRef }) {
   )
 }
 
-useGLTF.preload('/io.gltf')
+useGLTF.preload('/models/io.gltf')

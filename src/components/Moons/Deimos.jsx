@@ -36,4 +36,4 @@ export default function Deimos({ marsRef }) {
   );
 }
 
-useGLTF.preload('/deimos.gltf');
+useGLTF.preload('/models/deimos.gltf');

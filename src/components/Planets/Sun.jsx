@@ -51,4 +51,4 @@ export default function Sun(props) {
   )
 }
 
-useGLTF.preload('/sun.gltf')
+useGLTF.preload('/models/sun.gltf')

@@ -31,4 +31,4 @@ export default function Uranus(props) {
   )
 }
 
-useGLTF.preload('/uranus.gltf')
+useGLTF.preload('/models/uranus.gltf')

@@ -37,4 +37,4 @@ export default function Saturn(props) {
   )
 }
 
-useGLTF.preload('/saturn.gltf')
+useGLTF.preload('/models/saturn.gltf')

@@ -33,4 +33,4 @@ export default function Earth(props) {
   )
 }
 
-useGLTF.preload('/earth.gltf')
+useGLTF.preload('/models/earth.gltf')

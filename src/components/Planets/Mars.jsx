@@ -25,4 +25,4 @@ export default function Mars(props) {
   )
 }
 
-useGLTF.preload('/mars.gltf')
+useGLTF.preload('/models/mars.gltf')

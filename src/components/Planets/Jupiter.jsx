@@ -23,4 +23,4 @@ export default function Jupiter(props) {
   )
 }
 
-useGLTF.preload('/jupiter.gltf')
+useGLTF.preload('/models/jupiter.gltf')

@@ -29,4 +29,4 @@ export default function Ganymede({ jupiterRef }) {
   )
 }
 
-useGLTF.preload('/ganymede.gltf')
+useGLTF.preload('/models/ganymede.gltf')

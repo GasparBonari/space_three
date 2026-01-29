@@ -29,4 +29,4 @@ export default function Mimas({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Mimas.glb');
+useGLTF.preload('/models/Mimas.glb');

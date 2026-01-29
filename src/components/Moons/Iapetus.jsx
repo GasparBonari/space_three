@@ -29,4 +29,4 @@ export default function Iapetus({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Iapetus.glb');
+useGLTF.preload('/models/Iapetus.glb');

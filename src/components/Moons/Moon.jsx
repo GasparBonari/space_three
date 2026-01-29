@@ -36,4 +36,4 @@ export default function Moon({ earthRef }) {
   )
 }
 
-useGLTF.preload('/moon.gltf')
+useGLTF.preload('/models/moon.gltf')

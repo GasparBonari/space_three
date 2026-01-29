@@ -31,4 +31,4 @@ export default function Phobos({ marsRef }) {
   );
 }
 
-useGLTF.preload('/phobos.gltf');
+useGLTF.preload('/models/phobos.gltf');

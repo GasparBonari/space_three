@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function ISS({ earthRef, scale }) {
-  const { scene } = useGLTF('./models/iss.glb');
+  const { scene } = useGLTF('/models/iss.glb');
   const issRef = useRef();
 
   // Define orbit parameters for the ISS
@@ -31,4 +31,4 @@ export default function ISS({ earthRef, scale }) {
   return <primitive ref={issRef} object={scene} scale={[0.004, 0.004, 0.004]}/>;
 }
 
-useGLTF.preload('./iss.glb');
+useGLTF.preload('/models/iss.glb');

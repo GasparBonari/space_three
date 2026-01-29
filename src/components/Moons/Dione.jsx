@@ -29,4 +29,4 @@ export default function Dione({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Dione.glb');
+useGLTF.preload('/models/Dione.glb');

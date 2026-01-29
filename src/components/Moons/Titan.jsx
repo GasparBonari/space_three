@@ -33,4 +33,4 @@ export default function Titan({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/titan.gltf');
+useGLTF.preload('/models/titan.gltf');

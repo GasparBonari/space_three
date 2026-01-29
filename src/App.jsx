@@ -145,7 +145,7 @@ export default function App() {
 
   return (
     <>
-      <Canvas camera={{ position: [0, 0, 40] }}>
+      <Canvas camera={{ position: [0, 0, 40] }} dpr={[1, 1.5]} performance={{ min: 0.5 }}>
         <ambientLight intensity={0.4} />
         <pointLight position={[0, 0, 0]} intensity={2000} decay={2} distance={4000} />
         <Suspense fallback={null}>

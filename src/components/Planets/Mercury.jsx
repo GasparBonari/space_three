@@ -31,4 +31,4 @@ export default function Mercury(props) {
   )
 }
 
-useGLTF.preload('/mercury.gltf')
+useGLTF.preload('/models/mercury.gltf')

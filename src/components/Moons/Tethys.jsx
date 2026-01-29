@@ -29,4 +29,4 @@ export default function Tethys({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Tethys.glb');
+useGLTF.preload('/models/Tethys.glb');

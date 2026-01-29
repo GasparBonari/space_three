@@ -73,4 +73,4 @@ export default function Satellite({ earthRef }) {
   )
 }
 
-useGLTF.preload('/satellite.gltf')
+useGLTF.preload('/models/satellite.gltf')

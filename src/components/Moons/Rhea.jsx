@@ -29,4 +29,4 @@ export default function Rhea({ saturnRef }) {
   );
 }
 
-useGLTF.preload('/Rhea.glb');
+useGLTF.preload('/models/Rhea.glb');
