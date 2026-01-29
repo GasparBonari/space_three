@@ -1,6 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshDistortMaterial } from '@react-three/drei';
+import PlanetBadge from '../PlanetBadge/PlanetBadge';
 import './InfoPanel.css';
 
 const statsLookup = {
@@ -20,47 +18,6 @@ export default function InfoPanel({ planet, onClose }) {
   const stats = statsLookup[planet.name] || {};
   const wikiUrl = `https://en.wikipedia.org/wiki/${planet.name}`;
 
-  // small interactive 3D badge component using a tiny r3f Canvas
-  function Badge({ radius = 10 }) {
-    const mesh = useRef();
-    const [hovered, setHovered] = useState(false);
-    const lastPointer = useRef({ x: 0, y: 0 });
-
-    useFrame(() => {
-      if (mesh.current) {
-        // subtle idle rotation
-        mesh.current.rotation.y += 0.01;
-        // smooth hover scale
-        const target = hovered ? 1.12 : 1.0;
-        mesh.current.scale.x += (target - mesh.current.scale.x) * 0.12;
-        mesh.current.scale.y = mesh.current.scale.x;
-        mesh.current.scale.z = mesh.current.scale.x;
-      }
-    });
-
-    return (
-      <mesh
-        ref={mesh}
-        onPointerOver={(e) => { e.stopPropagation(); setHovered(true); lastPointer.current = { x: e.clientX, y: e.clientY }; document.body.style.cursor = 'pointer'; }}
-        onPointerOut={(e) => { e.stopPropagation(); setHovered(false); lastPointer.current = { x: 0, y: 0 }; document.body.style.cursor = 'default'; }}
-        onPointerMove={(e) => {
-          // allow subtle rotation by moving the pointer while hovered
-          if (!hovered || !mesh.current) return;
-          const dx = (e.clientX - lastPointer.current.x) || 0;
-          const dy = (e.clientY - lastPointer.current.y) || 0;
-          lastPointer.current = { x: e.clientX, y: e.clientY };
-          mesh.current.rotation.y += dx * 0.006;
-          mesh.current.rotation.x += dy * 0.004;
-        }}
-        onClick={(e) => { e.stopPropagation(); /* optional click action */ }}
-        position={[0, 0, 0]}
-      >
-        <sphereGeometry args={[Math.max(radius * 0.04, 0.3), 64, 64]} />
-        <MeshDistortMaterial distort={0.9} speed={3.2} color={hovered ? '#7fe0ff' : '#2b9cff'} metalness={0.6} roughness={0.2} />
-      </mesh>
-    );
-  }
-
   return (
     <div className="info-panel">
       <div className="info-panel__inner">
@@ -68,11 +25,7 @@ export default function InfoPanel({ planet, onClose }) {
 
         <div className="info-panel__header">
           <div className="info-panel__badge">
-            <Canvas camera={{ position: [0, 0, 6], fov: 50 }} style={{ pointerEvents: 'auto' }}>
-              <ambientLight intensity={0.6} />
-              <directionalLight intensity={0.8} position={[5, 5, 5]} />
-              <Badge radius={35} />
-            </Canvas>
+            <PlanetBadge radius={35} interactive />
           </div>
           <div>
             <h2 className="info-panel__title">{planet.name}</h2>

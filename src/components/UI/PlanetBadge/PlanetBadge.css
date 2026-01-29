@@ -1,0 +1,35 @@
+.planet-badge {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-badge__canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  background: transparent !important;
+}
+
+.planet-badge__loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, rgba(90, 170, 255, 0.2), transparent 70%);
+}
+
+.planet-badge__pulse {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 210, 255, 0.6);
+  box-shadow: 0 0 12px rgba(110, 200, 255, 0.6);
+  animation: planetBadgePulse 1.4s ease-in-out infinite;
+}
+
+@keyframes planetBadgePulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.6; }
+}

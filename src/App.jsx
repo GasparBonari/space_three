@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars } from '@react-three/drei';
+import { Stars, Preload } from '@react-three/drei';
 import './App.css';
 
 import Earth from './components/Planets/Earth';
@@ -20,7 +20,8 @@ import EarthModels from './components/PlanetModels/EarthModels';
 import MarsModels from './components/PlanetModels/MarsModels';
 import JupiterModels from './components/PlanetModels/JupiterModels';
 import SaturnModels from './components/PlanetModels/SaturnModels';
-import InfoPanel from './components/UI/InfoPanel';
+import InfoPanel from './components/UI/InfoPanel/InfoPanel';
+import IntroPanel from './components/UI/IntroPanel/IntroPanel';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
@@ -63,6 +64,7 @@ export default function App() {
   const [planetIndex, setPlanetIndex] = useState(2); // Track which planet camera should follow
   const [isZoomed, setIsZoomed] = useState(false);
   const [selectedPlanet, setSelectedPlanet] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
   const numAsteroids = 50;
 
   const planetRefs = useRef([]);
@@ -199,6 +201,7 @@ export default function App() {
             />
           ))}
         </Suspense>
+        <Preload all />
 
         <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
         <ColorStars />
@@ -213,6 +216,10 @@ export default function App() {
           planet={{ ...planets[selectedPlanet], index: selectedPlanet }}
           onClose={closeInfoPanel}
         />
+      )}
+
+      {showIntro && (
+        <IntroPanel onClose={() => setShowIntro(false)} />
       )}
     </>
   );
