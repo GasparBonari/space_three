@@ -56,11 +56,13 @@ function CameraController({ planets, planetIndex, isZoomed }) {
       );
 
       let baseDistance = minDistances.current.get(planet.name);
-      helpers.box.setFromObject(planetRef.current);
-      helpers.box.getBoundingSphere(helpers.sphere);
-      if (Number.isFinite(helpers.sphere.radius) && helpers.sphere.radius > 0) {
-        baseDistance = Math.max(baseDistance ?? 0, helpers.sphere.radius);
-        minDistances.current.set(planet.name, baseDistance);
+      if (baseDistance == null) {
+        helpers.box.setFromObject(planetRef.current);
+        helpers.box.getBoundingSphere(helpers.sphere);
+        if (Number.isFinite(helpers.sphere.radius) && helpers.sphere.radius > 0) {
+          baseDistance = helpers.sphere.radius;
+          minDistances.current.set(planet.name, baseDistance);
+        }
       }
 
       const minDistance = (baseDistance ?? 0) + padding;

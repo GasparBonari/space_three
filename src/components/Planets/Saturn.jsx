@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
@@ -12,10 +12,19 @@ export default function Saturn(props) {
     }
   });
 
-  // Clone the rings material and add an emissive property
-  const ringsMaterial = materials.material.clone() // Assuming 'materials.material' is the rings material
-  ringsMaterial.emissive = ringsMaterial.color.clone() // Use the original color for the emissive effect
-  ringsMaterial.emissiveIntensity = 0.04 // Adjust the emissive intensity to make the rings glow
+  // Clone the rings material once and reuse it
+  const ringsMaterial = useMemo(() => {
+    const clone = materials.material.clone()
+    clone.emissive = clone.color.clone()
+    clone.emissiveIntensity = 0.04
+    return clone
+  }, [materials])
+
+  useEffect(() => {
+    return () => {
+      ringsMaterial.dispose()
+    }
+  }, [ringsMaterial])
 
   return (
     <group ref={ saturnRef } {...props} dispose={null}>
