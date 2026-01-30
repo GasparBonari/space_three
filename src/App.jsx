@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Preload } from '@react-three/drei';
+import * as THREE from 'three';
 import './App.css';
 
 import Earth from './components/Planets/Earth';
@@ -25,24 +26,59 @@ import IntroPanel from './components/UI/IntroPanel/IntroPanel';
 
 // Component to control the camera and follow the orbiting planet
 function CameraController({ planets, planetIndex, isZoomed }) {
+  const helpers = useMemo(() => ({
+    desired: new THREE.Vector3(),
+    direction: new THREE.Vector3(),
+    worldPosition: new THREE.Vector3(),
+    box: new THREE.Box3(),
+    sphere: new THREE.Sphere(),
+    targetMatrix: new THREE.Matrix4(),
+    targetQuaternion: new THREE.Quaternion(),
+  }), []);
+  const minDistances = useRef(new Map());
+
   useFrame(({ camera }) => {
-    const planetRef = planets[planetIndex].ref;
+    const planet = planets[planetIndex];
+    const planetRef = planet.ref;
     if (planetRef && planetRef.current) {
-      const planetPosition = planetRef.current.position;
+      planetRef.current.getWorldPosition(helpers.worldPosition);
+      const planetPosition = helpers.worldPosition;
       
       // Get the custom zoom distance for each planet
-      const zoomDistance = isZoomed ? planets[planetIndex].zoomDistance : 7;  // Adjust zoom distance for each planet
+      const zoomDistance = isZoomed ? planet.zoomDistance : 7;  // Adjust zoom distance for each planet
       const offsetX = isZoomed ? 1 : 3;
+      const padding = isZoomed ? 0.6 : 1.2;
 
-      camera.position.lerp(
-        {
-          x: planetPosition.x + offsetX,  // Offset from planet
-          y: planetPosition.y + offsetX,
-          z: planetPosition.z + zoomDistance,  // Adjust zoom distance based on planet size
-        },
-        0.03 // Smooth camera transition
+      helpers.desired.set(
+        planetPosition.x + offsetX,  // Offset from planet
+        planetPosition.y + offsetX,
+        planetPosition.z + zoomDistance,  // Adjust zoom distance based on planet size
       );
-      camera.lookAt(planetPosition); // Keep looking at the planet
+
+      let baseDistance = minDistances.current.get(planet.name);
+      helpers.box.setFromObject(planetRef.current);
+      helpers.box.getBoundingSphere(helpers.sphere);
+      if (Number.isFinite(helpers.sphere.radius) && helpers.sphere.radius > 0) {
+        baseDistance = Math.max(baseDistance ?? 0, helpers.sphere.radius);
+        minDistances.current.set(planet.name, baseDistance);
+      }
+
+      const minDistance = (baseDistance ?? 0) + padding;
+      helpers.direction.subVectors(helpers.desired, planetPosition);
+      if (helpers.direction.length() < minDistance) {
+        helpers.direction.setLength(minDistance);
+        helpers.desired.copy(planetPosition).add(helpers.direction);
+      }
+
+      camera.position.lerp(helpers.desired, 0.03); // Smooth camera transition
+      helpers.direction.subVectors(camera.position, planetPosition);
+      if (helpers.direction.length() < minDistance) {
+        helpers.direction.setLength(minDistance);
+        camera.position.copy(planetPosition).add(helpers.direction);
+      }
+      helpers.targetMatrix.lookAt(camera.position, planetPosition, camera.up);
+      helpers.targetQuaternion.setFromRotationMatrix(helpers.targetMatrix);
+      camera.quaternion.slerp(helpers.targetQuaternion, 0.08); // Smooth orientation
     }
   });
 
