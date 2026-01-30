@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, Preload } from '@react-three/drei';
+import { Stars, Preload, AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
 import './App.css';
 
 import Earth from './components/Planets/Earth';
-import Asteroid from './components/Asteroids/Asteroid';
+import AsteroidField from './components/Asteroids/AsteroidField';
 import Mars from './components/Planets/Mars';
 import Venus from './components/Planets/Venus';
 import Jupiter from './components/Planets/Jupiter';
@@ -104,6 +104,8 @@ export default function App() {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [showIntro, setShowIntro] = useState(true);
   const numAsteroids = 50;
+  const starCount = 3000;
+  const backgroundStarCount = 2000;
 
   const planetRefs = useRef([]);
   if (planetRefs.current.length === 0) {
@@ -186,6 +188,7 @@ export default function App() {
   return (
     <>
       <Canvas camera={{ position: [0, 0, 40] }} dpr={[1, 1.5]} performance={{ min: 0.5 }}>
+        <AdaptiveDpr pixelated />
         <ambientLight intensity={0.4} />
         <pointLight position={[0, 0, 0]} intensity={2000} decay={2} distance={4000} />
         <Suspense fallback={null}>
@@ -229,20 +232,12 @@ export default function App() {
           <SaturnModels saturnRef={planets[5].ref} />
           
           {/* Asteroids */}
-          {asteroids.map((asteroid) => (
-            <Asteroid 
-              key={asteroid.id} 
-              position={asteroid.position} 
-              speed={asteroid.speed}
-              direction={asteroid.direction}
-              planetPosition={asteroid.planetPosition} 
-            />
-          ))}
+          <AsteroidField asteroids={asteroids} />
         </Suspense>
         <Preload all />
 
-        <Stars radius={200} depth={50} count={5000} factor={4} saturation={0} />
-        <ColorStars />
+        <Stars radius={200} depth={50} count={backgroundStarCount} factor={4} saturation={0} />
+        <ColorStars count={starCount} />
 
         {/* Camera controller to follow planets */}
         <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} />
