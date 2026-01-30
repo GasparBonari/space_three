@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial } from '@react-three/drei';
 import './PlanetBadge.css';
 
-function BadgeMesh({ radius = 35, interactive = true }) {
+function BadgeMesh({ radius = 35, interactive = true, onClick }) {
   const mesh = useRef();
   const [hovered, setHovered] = useState(false);
   const lastPointer = useRef({ x: 0, y: 0 });
@@ -42,12 +42,19 @@ function BadgeMesh({ radius = 35, interactive = true }) {
     mesh.current.rotation.x += dy * 0.004;
   };
 
+  const handleClick = (e) => {
+    if (!interactive || !onClick) return;
+    e.stopPropagation();
+    onClick(e);
+  };
+
   return (
     <mesh
       ref={mesh}
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}
       onPointerMove={handlePointerMove}
+      onClick={handleClick}
       position={[0, 0, 0]}
     >
       <sphereGeometry args={[Math.max(radius * 0.04, 0.3), 64, 64]} />
@@ -62,7 +69,7 @@ function BadgeMesh({ radius = 35, interactive = true }) {
   );
 }
 
-export default function PlanetBadge({ radius = 35, interactive = true, showLoader = true }) {
+export default function PlanetBadge({ radius = 35, interactive = true, showLoader = true, onClick }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -85,7 +92,7 @@ export default function PlanetBadge({ radius = 35, interactive = true, showLoade
       >
         <ambientLight intensity={0.6} />
         <directionalLight intensity={0.8} position={[5, 5, 5]} />
-        <BadgeMesh radius={radius} interactive={interactive} />
+        <BadgeMesh radius={radius} interactive={interactive} onClick={onClick} />
       </Canvas>
     </div>
   );

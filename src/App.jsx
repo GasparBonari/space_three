@@ -215,6 +215,7 @@ export default function App() {
         <InfoPanel
           planet={{ ...planets[selectedPlanet], index: selectedPlanet }}
           onClose={closeInfoPanel}
+          onBadgeClick={() => setShowIntro(true)}
         />
       )}
 

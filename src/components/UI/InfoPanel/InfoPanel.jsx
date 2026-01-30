@@ -12,7 +12,7 @@ const statsLookup = {
   Neptune: { distance: '30.1 AU', mass: '17.15 M⊕', radius: '24,622 km', gravity: '11.15 m/s²', period: '60,190 d' },
 };
 
-export default function InfoPanel({ planet, onClose }) {
+export default function InfoPanel({ planet, onClose, onBadgeClick }) {
   if (!planet) return null;
 
   const stats = statsLookup[planet.name] || {};
@@ -25,7 +25,7 @@ export default function InfoPanel({ planet, onClose }) {
 
         <div className="info-panel__header">
           <div className="info-panel__badge">
-            <PlanetBadge radius={35} interactive />
+            <PlanetBadge radius={35} interactive onClick={onBadgeClick} />
           </div>
           <div>
             <h2 className="info-panel__title">{planet.name}</h2>
