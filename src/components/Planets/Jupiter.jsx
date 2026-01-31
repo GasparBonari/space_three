@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Jupiter(props) {
+export default function Jupiter({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/jupiter.gltf')
   const jupiterRef = useRef();
 
   useFrame((_, delta) => {
-    if (jupiterRef.current) {
-      jupiterRef.current.rotation.y += 0.10 * delta;
+    if (jupiterRef.current && !paused) {
+      jupiterRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 

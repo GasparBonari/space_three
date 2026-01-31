@@ -2,18 +2,22 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
-export default function ISS({ earthRef, scale }) {
+export default function ISS({ earthRef, scale, timeScale = 1, paused = false }) {
   const { scene } = useGLTF('/models/iss.glb');
   const issRef = useRef();
+  const timeRef = useRef(0);
 
   // Define orbit parameters for the ISS
   const orbitRadius = 1.3; // Radius of ISS orbit around Earth (close in LEO)
   const orbitSpeed = 0.2; // Speed of ISS orbit
   const inclination = 1; // Tilt of the orbit (ISS orbits Earth with an inclination)
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (issRef.current && earthRef.current) {
-      const theta = state.clock.getElapsedTime() * orbitSpeed; // Angle in radians for the orbit
+      if (!paused) {
+        timeRef.current += delta * timeScale;
+      }
+      const theta = timeRef.current * orbitSpeed; // Angle in radians for the orbit
       const earthPosition = earthRef.current.position; // Earth's current position
 
       // Calculate the ISS position relative to Earth with inclination
@@ -24,7 +28,9 @@ export default function ISS({ earthRef, scale }) {
       issRef.current.position.set(x, y, z); // Set the position of the ISS
 
       // Rotate the ISS to face along its orbit (optional for realism)
-      issRef.current.lookAt(earthPosition);
+      if (!paused) {
+        issRef.current.lookAt(earthPosition);
+      }
     }
   });
 

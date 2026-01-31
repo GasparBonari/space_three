@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei'
 
-export default function Moon({ earthRef }) {
+export default function Moon({ earthRef, timeScale = 1, paused = false }) {
   const { nodes, materials } = useGLTF('/models/moon.gltf');
   const moonRef = useRef();
+  const timeRef = useRef(0);
 
   // Define orbit parameters for the Moon
   const orbitRadius = 4; // Radius of the Moon's orbit
@@ -12,9 +13,12 @@ export default function Moon({ earthRef }) {
   const rotationSpeed = 0.01; // Rotation own axis
 
   // Update the Moon's position to make it orbit around the Earth
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (moonRef.current && earthRef.current) {
-      const theta = state.clock.getElapsedTime() * orbitSpeed; // Angle in radians for the orbit
+      if (!paused) {
+        timeRef.current += delta * timeScale;
+      }
+      const theta = timeRef.current * orbitSpeed; // Angle in radians for the orbit
       const earthPosition = earthRef.current.position; // Earth's current position
       
       // Calculate the Moon's position relative to Earth
@@ -23,7 +27,9 @@ export default function Moon({ earthRef }) {
       moonRef.current.position.set(x, earthPosition.y, z); // Orbiting in the xz-plane at Earth's y-level'
 
       // Make the Moon rotate on its own axis
-      moonRef.current.rotation.y -= rotationSpeed;
+      if (!paused) {
+        moonRef.current.rotation.y -= rotationSpeed * delta * timeScale;
+      }
     }
   });
 

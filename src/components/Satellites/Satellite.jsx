@@ -2,18 +2,22 @@ import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
-export default function Satellite({ earthRef }) {
+export default function Satellite({ earthRef, timeScale = 1, paused = false }) {
   const { nodes, materials } = useGLTF('/models/satellite.gltf')
   const satelliteRef = useRef();
+  const timeRef = useRef(0);
 
   // Define orbit parameters
   const orbitRadius = 1.5; // Radius of the orbit
   const orbitSpeed = 0.4; // Speed of orbit
 
   // Update the satellite's position to make it orbit around the Earth
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (satelliteRef.current && earthRef.current) {
-      const theta = state.clock.getElapsedTime() * orbitSpeed; // Angle in radians for the orbit
+      if (!paused) {
+        timeRef.current += delta * timeScale;
+      }
+      const theta = timeRef.current * orbitSpeed; // Angle in radians for the orbit
       const earthPosition = earthRef.current.position; // Earth's current position
       
       // Calculate satellite's position relative to Earth

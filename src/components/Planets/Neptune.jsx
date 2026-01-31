@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export default function Neptune(props) {
+export default function Neptune({ timeScale = 1, paused = false, ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/models/neptune.gltf')
   const { actions } = useAnimations(animations, group)
@@ -10,9 +10,18 @@ export default function Neptune(props) {
     if (actions && animations[0]?.name) {
       const action = actions[animations[0].name];
       action.play();
-      action.timeScale = 0.1;
+      return () => action.stop();
     }
+    return undefined;
   }, [actions, animations]);
+
+  useEffect(() => {
+    if (actions && animations[0]?.name) {
+      const action = actions[animations[0].name];
+      action.timeScale = 0.1 * timeScale;
+      action.paused = paused;
+    }
+  }, [actions, animations, paused, timeScale]);
 
   return (
     <group ref={group} {...props} dispose={null}>

@@ -6,16 +6,16 @@ import Rhea from '../Moons/Rhea';
 import Tethys from '../Moons/Tethys';
 import Iapetus from '../Moons/Iapetus';
 
-export default function SaturnModels({ saturnRef }) {
+export default function SaturnModels({ saturnRef, timeScale = 1, paused = false }) {
   return (
     <>
-      <Titan saturnRef={saturnRef} />
-      <Dione saturnRef={saturnRef} />
-      <Enceladus saturnRef={saturnRef} />
-      <Mimas saturnRef={saturnRef} />
-      <Rhea saturnRef={saturnRef} />
-      <Tethys saturnRef={saturnRef} />
-      <Iapetus saturnRef={saturnRef} />
+      <Titan saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Dione saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Enceladus saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Mimas saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Rhea saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Tethys saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
+      <Iapetus saturnRef={saturnRef} timeScale={timeScale} paused={paused} />
     </>
   );
 }

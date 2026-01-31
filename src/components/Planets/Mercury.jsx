@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Mercury(props) {
+export default function Mercury({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/mercury.gltf')
   const mercuryRef = useRef();
 
   useFrame((_, delta) => {
-    if (mercuryRef.current) {
-      mercuryRef.current.rotation.y += 0.10 * delta;
+    if (mercuryRef.current && !paused) {
+      mercuryRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 

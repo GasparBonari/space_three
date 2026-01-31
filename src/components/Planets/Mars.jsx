@@ -2,13 +2,13 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Mars(props) {
+export default function Mars({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/mars.gltf')
   const marsRef = useRef();
 
   useFrame((_, delta) => {
-    if (marsRef.current) {
-      marsRef.current.rotation.y += 0.10 * delta;
+    if (marsRef.current && !paused) {
+      marsRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 

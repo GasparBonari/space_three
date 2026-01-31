@@ -54,7 +54,7 @@ export default function IntroPanel({ onClose }) {
         <div className="intro-panel__grid">
           <div className="intro-panel__card">
             <div className="intro-panel__label">Controls</div>
-            <div className="intro-panel__value">Scroll to switch planets. Click to zoom.</div>
+            <div className="intro-panel__value">Scroll to switch planets. Use the control panel for time and camera.</div>
           </div>
           <div className="intro-panel__card">
             <div className="intro-panel__label">Navigation</div>
@@ -66,7 +66,7 @@ export default function IntroPanel({ onClose }) {
           </div>
           <div className="intro-panel__card">
             <div className="intro-panel__label">Tip</div>
-            <div className="intro-panel__value">Click a planet twice to toggle close zoom.</div>
+            <div className="intro-panel__value">Toggle labels or wireframe to inspect the system.</div>
           </div>
         </div>
 

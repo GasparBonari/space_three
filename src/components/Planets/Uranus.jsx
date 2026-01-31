@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Uranus(props) {
+export default function Uranus({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/uranus.gltf')
   const uranusRef = useRef();
 
   useFrame((_, delta) => {
-    if (uranusRef.current) {
-      uranusRef.current.rotation.y -= 0.9 * delta;
+    if (uranusRef.current && !paused) {
+      uranusRef.current.rotation.y -= 0.9 * delta * timeScale;
     }
   });
 

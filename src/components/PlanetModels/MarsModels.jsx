@@ -1,11 +1,11 @@
 import Phobos from '../Moons/Phobos';
 import Deimos from '../Moons/Deimos';
 
-export default function MarsModels({ marsRef }) {
+export default function MarsModels({ marsRef, timeScale = 1, paused = false }) {
   return (
     <>
-      <Phobos marsRef={marsRef} />
-      <Deimos marsRef={marsRef} />
+      <Phobos marsRef={marsRef} timeScale={timeScale} paused={paused} />
+      <Deimos marsRef={marsRef} timeScale={timeScale} paused={paused} />
     </>
   );
 }

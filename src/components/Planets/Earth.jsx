@@ -2,13 +2,13 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Earth(props) {
+export default function Earth({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/earth.gltf')
   const earthRef = useRef()
 
   useFrame((_, delta) => {
-    if (earthRef.current) {
-      earthRef.current.rotation.y += 0.10 * delta;
+    if (earthRef.current && !paused) {
+      earthRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 

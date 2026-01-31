@@ -2,23 +2,29 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
-export default function Titan({ saturnRef }) {
+export default function Titan({ saturnRef, timeScale = 1, paused = false }) {
   const { nodes, materials } = useGLTF('/models/titan.gltf');
   const titanRef = useRef();
+  const timeRef = useRef(0);
 
   // Titan orbit parameters
   const orbitRadius = 14; // Distance from Saturn
   const orbitSpeed = 0.12; // Speed of orbit
   const rotationSpeed = 0.01; // Own axis rotation
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (titanRef.current && saturnRef.current) {
-      const theta = state.clock.getElapsedTime() * orbitSpeed;
+      if (!paused) {
+        timeRef.current += delta * timeScale;
+      }
+      const theta = timeRef.current * orbitSpeed;
       const saturnPosition = saturnRef.current.position;
       const x = saturnPosition.x + Math.cos(theta) * orbitRadius;
       const z = saturnPosition.z + Math.sin(theta) * orbitRadius;
       titanRef.current.position.set(x, saturnPosition.y, z);
-      titanRef.current.rotation.y -= rotationSpeed;
+      if (!paused) {
+        titanRef.current.rotation.y -= rotationSpeed * delta * timeScale;
+      }
     }
   });
 

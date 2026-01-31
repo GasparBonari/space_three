@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
-export default function Sun(props) {
+export default function Sun({ timeScale = 1, paused = false, ...props }) {
   const sunRef = React.useRef()
   const { nodes, materials, animations } = useGLTF('/models/sun.gltf')
   const { actions } = useAnimations(animations, sunRef)
 
   useFrame((_, delta) => {
-    if (sunRef.current) {
-      sunRef.current.rotation.y += 0.10 * delta;
+    if (sunRef.current && !paused) {
+      sunRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 
@@ -17,9 +17,6 @@ export default function Sun(props) {
     // Trigger the animation named "Take 001"
     if (actions['Take 001']) {
       actions['Take 001'].play();  // Start the animation
-
-      // Slow down the animation by reducing the timeScale
-      actions['Take 001'].timeScale = 0.5; // Adjust this value to slow down the animation
     }
 
     return () => {
@@ -28,6 +25,13 @@ export default function Sun(props) {
       }
     };
   }, [actions]);
+
+  useEffect(() => {
+    if (actions['Take 001']) {
+      actions['Take 001'].timeScale = 0.5 * timeScale;
+      actions['Take 001'].paused = paused;
+    }
+  }, [actions, paused, timeScale]);
 
   return (
     <group ref={sunRef} {...props} dispose={null}>

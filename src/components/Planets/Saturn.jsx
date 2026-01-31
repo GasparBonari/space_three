@@ -2,13 +2,13 @@ import { useRef, useMemo, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Saturn(props) {
+export default function Saturn({ timeScale = 1, paused = false, ...props }) {
   const { nodes, materials } = useGLTF('/models/saturn.gltf')
   const saturnRef = useRef();
 
   useFrame((_, delta) => {
-    if (saturnRef.current) {
-      saturnRef.current.rotation.y += 0.10 * delta;
+    if (saturnRef.current && !paused) {
+      saturnRef.current.rotation.y += 0.10 * delta * timeScale;
     }
   });
 

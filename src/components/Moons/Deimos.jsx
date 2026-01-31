@@ -2,17 +2,21 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
-export default function Deimos({ marsRef }) {
+export default function Deimos({ marsRef, timeScale = 1, paused = false }) {
   const { nodes, materials } = useGLTF('/models/deimos.gltf');
   const deimosRef = useRef();
+  const timeRef = useRef(0);
 
   // Deimos orbit parameters
   const orbitRadius = 7;
   const orbitSpeed = 0.5;
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (deimosRef.current && marsRef.current) {
-      const theta = state.clock.getElapsedTime() * orbitSpeed;
+      if (!paused) {
+        timeRef.current += delta * timeScale;
+      }
+      const theta = timeRef.current * orbitSpeed;
       const marsPosition = marsRef.current.position;
 
       const x = marsPosition.x + Math.cos(theta) * orbitRadius;
@@ -20,7 +24,9 @@ export default function Deimos({ marsRef }) {
       deimosRef.current.position.set(x, marsPosition.y, z);
 
       // Lock rotation to face Mars (tidal locking)
-      deimosRef.current.lookAt(marsPosition);
+      if (!paused) {
+        deimosRef.current.lookAt(marsPosition);
+      }
     }
   });
 

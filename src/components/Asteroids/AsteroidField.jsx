@@ -3,10 +3,11 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-export default function AsteroidField({ asteroids }) {
+export default function AsteroidField({ asteroids, timeScale = 1, paused = false }) {
   const { nodes, materials } = useGLTF('/models/asteroid.gltf');
   const meshRef = useRef();
   const temp = useMemo(() => new THREE.Object3D(), []);
+  const tempQuat = useMemo(() => new THREE.Quaternion(), []);
 
   const asteroidRadius = 0.591 * 0.1;
   const earthRadius = 1.9739451558252037;
@@ -46,14 +47,6 @@ export default function AsteroidField({ asteroids }) {
     () => asteroids.map(() => new THREE.Quaternion()),
     [asteroids]
   );
-  const deltaQuats = useMemo(
-    () =>
-      rotationAxes.map((axis, index) =>
-        new THREE.Quaternion().setFromAxisAngle(axis, rotationSpeeds[index])
-      ),
-    [rotationAxes, rotationSpeeds]
-  );
-
   const resetAroundPlanet = (index) => {
     const planetPos = planetPositions[index];
     const radius = Math.random() * 20 + 5;
@@ -81,13 +74,15 @@ export default function AsteroidField({ asteroids }) {
     meshRef.current.instanceMatrix.needsUpdate = true;
   }, [instanceScale, positions, rotationQuats, temp]);
 
-  useFrame(() => {
-    if (!meshRef.current) return;
+  useFrame((_, delta) => {
+    if (!meshRef.current || paused) return;
     const radiusSum = asteroidRadius + earthRadius;
+    const step = delta * 60 * timeScale;
 
     for (let i = 0; i < positions.length; i += 1) {
-      positions[i].addScaledVector(directions[i], speeds[i]);
-      rotationQuats[i].multiply(deltaQuats[i]);
+      positions[i].addScaledVector(directions[i], speeds[i] * step);
+      tempQuat.setFromAxisAngle(rotationAxes[i], rotationSpeeds[i] * step);
+      rotationQuats[i].multiply(tempQuat);
 
       const planetPos = planetPositions[i];
       const dx = positions[i].x - planetPos.x;

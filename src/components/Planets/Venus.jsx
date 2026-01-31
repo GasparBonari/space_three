@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 
-export default function Venus(props) {
+export default function Venus({ timeScale = 1, paused = false, ...props }) {
 	const { nodes, materials } = useGLTF('/models/venus.gltf')
 	const venusRef = useRef();
 
 	useFrame((_, delta) => {
-		if (venusRef.current) {
-			venusRef.current.rotation.y -= 0.10 * delta;
+		if (venusRef.current && !paused) {
+			venusRef.current.rotation.y -= 0.10 * delta * timeScale;
 		}
 	});
 
