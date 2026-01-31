@@ -1,3 +1,4 @@
+import PlanetBadge from '../PlanetBadge/PlanetBadge';
 import './HudMenu.css';
 
 export default function HudMenu({
@@ -7,6 +8,7 @@ export default function HudMenu({
   onToggleControls,
   showMiniMap,
   onToggleMiniMap,
+  onBadgeClick,
 }) {
   return (
     <div className="hud-menu">
@@ -19,6 +21,15 @@ export default function HudMenu({
       {open && (
         <div className="hud-menu__panel">
           <div className="hud-menu__title">HUD Layers</div>
+          <button className="hud-menu__badge" type="button" onClick={onBadgeClick}>
+            <span className="hud-menu__badge-icon">
+              <PlanetBadge radius={35} interactive={false} />
+            </span>
+            <span className="hud-menu__badge-text">
+              <span className="hud-menu__badge-label">Intro Panel</span>
+              <span className="hud-menu__badge-subtitle">Open briefing</span>
+            </span>
+          </button>
           <label className="hud-menu__item">
             <input type="checkbox" checked={showControls} onChange={onToggleControls} />
             <span>Orbital Controls</span>

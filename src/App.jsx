@@ -365,6 +365,7 @@ export default function App() {
         onToggleControls={() => setShowControlPanel((prev) => !prev)}
         showMiniMap={showMiniMap}
         onToggleMiniMap={() => setShowMiniMap((prev) => !prev)}
+        onBadgeClick={() => setShowIntro(true)}
       />
 
       {showMiniMap && (

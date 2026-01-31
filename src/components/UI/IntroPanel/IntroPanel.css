@@ -60,9 +60,12 @@
   background: transparent !important;
 }
 
-.intro-panel__badge canvas { background: transparent !important; }
-
-.intro-panel__badge canvas { width: 100% !important; height: 100% !important; display: block; }
+.intro-panel__badge canvas {
+  background: transparent !important;
+  width: 100% !important; 
+  height: 100% !important; 
+  display: block; 
+}
 
 .intro-panel__eyebrow {
   font-size: 11px;
