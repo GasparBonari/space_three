@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Enceladus({
+const Enceladus = forwardRef(function Enceladus({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Enceladus.glb');
-  const enceladusRef = useRef();
+  const localRef = useRef();
+  const enceladusRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Enceladus({
   });
 
   return (
-    <group ref={enceladusRef} dispose={null}>
+    <group
+      ref={enceladusRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.001}>
         <mesh geometry={nodes.cylindrically_mapped_sphere.geometry} material={materials['Default OBJ.001']} />
       </group>
       <OrbitalLabel text="Enceladus" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Enceladus;
 
 useGLTF.preload('/models/Enceladus.glb');

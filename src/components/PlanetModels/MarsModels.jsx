@@ -6,11 +6,29 @@ export default function MarsModels({
   timeScale = 1,
   paused = false,
   showLabels = false,
+  phobosRef,
+  deimosRef,
+  onPhobosSelect,
+  onDeimosSelect,
 }) {
   return (
     <>
-      <Phobos marsRef={marsRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Deimos marsRef={marsRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
+      <Phobos
+        ref={phobosRef}
+        marsRef={marsRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onPhobosSelect}
+      />
+      <Deimos
+        ref={deimosRef}
+        marsRef={marsRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onDeimosSelect}
+      />
     </>
   );
 }

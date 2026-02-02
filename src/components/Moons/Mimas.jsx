@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Mimas({
+const Mimas = forwardRef(function Mimas({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Mimas.glb');
-  const mimasRef = useRef();
+  const localRef = useRef();
+  const mimasRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Mimas({
   });
 
   return (
-    <group ref={mimasRef} dispose={null}>
+    <group
+      ref={mimasRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.002}>
         <mesh geometry={nodes.Mimas.geometry} material={materials.Mimas_mat} />
       </group>
       <OrbitalLabel text="Mimas" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Mimas;
 
 useGLTF.preload('/models/Mimas.glb');

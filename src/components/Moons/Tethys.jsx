@@ -1,16 +1,18 @@
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Tethys({
+const Tethys = forwardRef(function Tethys({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Tethys.glb');
-  const tethysRef = useRef();
+  const localRef = useRef();
+  const tethysRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Tethys({
   });
 
   return (
-    <group ref={tethysRef} dispose={null}>
+    <group
+      ref={tethysRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.001}>
         <mesh geometry={nodes.cylindrically_mapped_sphere.geometry} material={materials['Default OBJ.001']} />
       </group>
       <OrbitalLabel text="Tethys" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Tethys;
 
 useGLTF.preload('/models/Tethys.glb');

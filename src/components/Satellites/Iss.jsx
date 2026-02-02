@@ -1,18 +1,20 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function ISS({
+const ISS = forwardRef(function ISS({
   earthRef,
   scale,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { scene } = useGLTF('/models/iss.glb');
   const issScene = useMemo(() => scene.clone(true), [scene]);
-  const issGroupRef = useRef();
+  const localRef = useRef();
+  const issGroupRef = ref ?? localRef;
   const issModelRef = useRef();
   const timeRef = useRef(0);
 
@@ -44,11 +46,20 @@ export default function ISS({
   });
 
   return (
-    <group ref={issGroupRef} dispose={null}>
+    <group
+      ref={issGroupRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <primitive ref={issModelRef} object={issScene} scale={scale ?? [0.004, 0.004, 0.004]} />
       <OrbitalLabel text="ISS" visible={showLabel} position={[0, 0.25, 0]} distanceFactor={6} />
     </group>
   );
-}
+});
+
+export default ISS;
 
 useGLTF.preload('/models/iss.glb');

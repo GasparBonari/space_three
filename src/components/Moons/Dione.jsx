@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Dione({
+const Dione = forwardRef(function Dione({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Dione.glb');
-  const dioneRef = useRef();
+  const localRef = useRef();
+  const dioneRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Dione({
   });
 
   return (
-    <group ref={dioneRef} dispose={null}>
+    <group
+      ref={dioneRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.001}>
         <mesh geometry={nodes.cylindrically_mapped_sphere.geometry} material={materials['Default OBJ.001']} />
       </group>
       <OrbitalLabel text="Dione" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Dione;
 
 useGLTF.preload('/models/Dione.glb');

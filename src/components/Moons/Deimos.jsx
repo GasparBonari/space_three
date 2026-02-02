@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Deimos({
+const Deimos = forwardRef(function Deimos({
   marsRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/deimos.gltf');
-  const deimosRef = useRef();
+  const localRef = useRef();
+  const deimosRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Deimos orbit parameters
@@ -37,7 +39,14 @@ export default function Deimos({
   });
 
   return (
-    <group ref={deimosRef} dispose={null}>
+    <group
+      ref={deimosRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <mesh 
         geometry={nodes['Deimos_01_-_Default_0'].geometry} 
         material={materials['01_-_Default']} 
@@ -47,6 +56,8 @@ export default function Deimos({
       <OrbitalLabel text="Deimos" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Deimos;
 
 useGLTF.preload('/models/deimos.gltf');

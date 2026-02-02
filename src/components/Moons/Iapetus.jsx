@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Iapetus({
+const Iapetus = forwardRef(function Iapetus({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Iapetus.glb');
-  const iapetusRef = useRef();
+  const localRef = useRef();
+  const iapetusRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Iapetus({
   });
 
   return (
-    <group ref={iapetusRef} dispose={null}>
+    <group
+      ref={iapetusRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.002}>
         <mesh geometry={nodes.cylindrically_mapped_sphere.geometry} material={materials['Default OBJ.001']} />
       </group>
       <OrbitalLabel text="Iapetus" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Iapetus;
 
 useGLTF.preload('/models/Iapetus.glb');

@@ -7,12 +7,39 @@ export default function EarthModels({
   timeScale = 1,
   paused = false,
   showLabels = false,
+  moonRef,
+  issRef,
+  satelliteRef,
+  onMoonSelect,
+  onIssSelect,
+  onSatelliteSelect,
 }) {
   return (
     <>
-      <Moon earthRef={earthRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <ISS earthRef={earthRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Satellite earthRef={earthRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
+      <Moon
+        ref={moonRef}
+        earthRef={earthRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onMoonSelect}
+      />
+      <ISS
+        ref={issRef}
+        earthRef={earthRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onIssSelect}
+      />
+      <Satellite
+        ref={satelliteRef}
+        earthRef={earthRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onSatelliteSelect}
+      />
     </>
   );
 }

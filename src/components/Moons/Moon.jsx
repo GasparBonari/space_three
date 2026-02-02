@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Moon({
+const Moon = forwardRef(function Moon({
   earthRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/moon.gltf');
-  const moonRef = useRef();
+  const localRef = useRef();
+  const moonRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Define orbit parameters for the Moon
@@ -40,13 +42,22 @@ export default function Moon({
   });
 
   return (
-    <group ref={moonRef} dispose={null}>
+    <group
+      ref={moonRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Material__50} rotation={[-Math.PI / 2, 0, 0]} scale={0.2}/>
       </group>
       <OrbitalLabel text="Moon" visible={showLabel} position={[0, 0.45, 0]} />
     </group>
   )
-}
+});
+
+export default Moon;
 
 useGLTF.preload('/models/moon.gltf')

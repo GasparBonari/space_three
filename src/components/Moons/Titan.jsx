@@ -1,16 +1,18 @@
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Titan({
+const Titan = forwardRef(function Titan({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/titan.gltf');
-  const titanRef = useRef();
+  const localRef = useRef();
+  const titanRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Titan orbit parameters
@@ -35,7 +37,14 @@ export default function Titan({
   });
 
   return (
-    <group ref={titanRef} dispose={null}>
+    <group
+      ref={titanRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.004}>
         <mesh geometry={nodes.Atmosphere_Atmosphere_0.geometry} material={materials.Atmosphere} />
         <mesh geometry={nodes.Clouds_Clouds_0.geometry} material={materials.Clouds} />
@@ -44,6 +53,8 @@ export default function Titan({
       <OrbitalLabel text="Titan" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Titan;
 
 useGLTF.preload('/models/titan.gltf');

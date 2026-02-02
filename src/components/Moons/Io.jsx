@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Io({
+const Io = forwardRef(function Io({
   jupiterRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/io.gltf')
-  const ioRef = useRef();
+  const localRef = useRef();
+  const ioRef = ref ?? localRef;
   const timeRef = useRef(0);
   
   const orbitRadius = 4; // Radius of the orbit
@@ -36,11 +38,20 @@ export default function Io({
   });
 
   return (
-    <group ref={ioRef} dispose={null}>
+    <group
+      ref={ioRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <mesh geometry={nodes.Object_2.geometry} material={materials.material} rotation={[-Math.PI / 2, 0, 0]} scale={0.0025}/>
       <OrbitalLabel text="Io" visible={showLabel} />
     </group>
   )
-}
+});
+
+export default Io;
 
 useGLTF.preload('/models/io.gltf')

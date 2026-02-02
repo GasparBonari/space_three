@@ -1,16 +1,18 @@
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Phobos({
+const Phobos = forwardRef(function Phobos({
   marsRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/phobos.gltf');
-  const phobosRef = useRef();
+  const localRef = useRef();
+  const phobosRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Phobos orbit parameters
@@ -37,11 +39,20 @@ export default function Phobos({
   });
 
   return (
-    <group ref={phobosRef} dispose={null}>
+    <group
+      ref={phobosRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <mesh geometry={nodes.Object_4.geometry} material={materials.phobos_tex_01} rotation={[Math.PI / 2, 0, 0]} scale={0.01}/>
       <OrbitalLabel text="Phobos" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Phobos;
 
 useGLTF.preload('/models/phobos.gltf');

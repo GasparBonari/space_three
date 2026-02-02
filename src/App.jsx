@@ -28,7 +28,7 @@ import MiniMap from './components/UI/MiniMap/MiniMap';
 import HudMenu from './components/UI/HudMenu/HudMenu';
 
 // Component to control the camera and follow the orbiting planet
-function CameraController({ planets, planetIndex, isZoomed, mode }) {
+function CameraController({ targets, targetIndex, isZoomed, mode }) {
   const helpers = useMemo(() => ({
     desired: new THREE.Vector3(),
     direction: new THREE.Vector3(),
@@ -57,47 +57,48 @@ function CameraController({ planets, planetIndex, isZoomed, mode }) {
       return;
     }
 
-    const planet = planets[planetIndex];
-    const planetRef = planet?.ref;
-    if (planetRef && planetRef.current) {
-      planetRef.current.getWorldPosition(helpers.worldPosition);
-      const planetPosition = helpers.worldPosition;
+    const target = targets[targetIndex];
+    const targetRef = target?.ref;
+    if (targetRef && targetRef.current) {
+      targetRef.current.getWorldPosition(helpers.worldPosition);
+      const targetPosition = helpers.worldPosition;
 
       // Get the custom zoom distance for each planet
-      const zoomDistance = isZoomed ? planet.zoomDistance : 7;
+      const zoomDistance = isZoomed ? target.zoomDistance : 7;
       const offsetX = isZoomed ? 1 : 3;
       const padding = isZoomed ? 0.6 : 1.2;
 
       helpers.desired.set(
-        planetPosition.x + offsetX,
-        planetPosition.y + offsetX,
-        planetPosition.z + zoomDistance,
+        targetPosition.x + offsetX,
+        targetPosition.y + offsetX,
+        targetPosition.z + zoomDistance,
       );
 
-      let baseDistance = minDistances.current.get(planet.name);
+      const targetKey = target.id ?? target.name;
+      let baseDistance = minDistances.current.get(targetKey);
       if (baseDistance == null) {
-        helpers.box.setFromObject(planetRef.current);
+        helpers.box.setFromObject(targetRef.current);
         helpers.box.getBoundingSphere(helpers.sphere);
         if (Number.isFinite(helpers.sphere.radius) && helpers.sphere.radius > 0) {
           baseDistance = helpers.sphere.radius;
-          minDistances.current.set(planet.name, baseDistance);
+          minDistances.current.set(targetKey, baseDistance);
         }
       }
 
       const minDistance = (baseDistance ?? 0) + padding;
-      helpers.direction.subVectors(helpers.desired, planetPosition);
+      helpers.direction.subVectors(helpers.desired, targetPosition);
       if (helpers.direction.length() < minDistance) {
         helpers.direction.setLength(minDistance);
-        helpers.desired.copy(planetPosition).add(helpers.direction);
+        helpers.desired.copy(targetPosition).add(helpers.direction);
       }
 
       camera.position.lerp(helpers.desired, 0.03);
-      helpers.direction.subVectors(camera.position, planetPosition);
+      helpers.direction.subVectors(camera.position, targetPosition);
       if (helpers.direction.length() < minDistance) {
         helpers.direction.setLength(minDistance);
-        camera.position.copy(planetPosition).add(helpers.direction);
+        camera.position.copy(targetPosition).add(helpers.direction);
       }
-      helpers.targetMatrix.lookAt(camera.position, planetPosition, camera.up);
+      helpers.targetMatrix.lookAt(camera.position, targetPosition, camera.up);
       helpers.targetQuaternion.setFromRotationMatrix(helpers.targetMatrix);
       camera.quaternion.slerp(helpers.targetQuaternion, 0.08);
     }
@@ -181,6 +182,8 @@ const Planet = React.forwardRef(
 
 export default function App() {
   const [planetIndex, setPlanetIndex] = useState(2); // Track which planet camera should follow
+  const [focusGroup, setFocusGroup] = useState('planets');
+  const [focusIndex, setFocusIndex] = useState(2);
   const [isZoomed, setIsZoomed] = useState(false);
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [showIntro, setShowIntro] = useState(true);
@@ -203,11 +206,19 @@ export default function App() {
   });
 
   const planetRefs = useRef([]);
+  const targetRefs = useRef({});
   if (planetRefs.current.length === 0) {
     for (let i = 0; i < 8; i++) {
       planetRefs.current.push(React.createRef());
     }
   }
+
+  const getTargetRef = useCallback((id) => {
+    if (!targetRefs.current[id]) {
+      targetRefs.current[id] = React.createRef();
+    }
+    return targetRefs.current[id];
+  }, []);
 
   const planets = useMemo(
     () => [
@@ -228,26 +239,113 @@ export default function App() {
     [planets]
   );
 
+  const orbitingGroups = useMemo(() => ({
+    'earth-orbit': {
+      parentIndex: 2,
+      targets: [
+        { id: 'earth-moon', name: 'Moon', zoomDistance: 1.6 },
+        { id: 'earth-iss', name: 'ISS', zoomDistance: 1.2 },
+        { id: 'earth-satellite', name: 'Satellite', zoomDistance: 1.3 },
+      ],
+    },
+    'mars-moons': {
+      parentIndex: 3,
+      targets: [
+        { id: 'mars-phobos', name: 'Phobos', zoomDistance: 1.4 },
+        { id: 'mars-deimos', name: 'Deimos', zoomDistance: 1.6 },
+      ],
+    },
+    'jupiter-moons': {
+      parentIndex: 4,
+      targets: [
+        { id: 'jupiter-io', name: 'Io', zoomDistance: 2.2 },
+        { id: 'jupiter-europa', name: 'Europa', zoomDistance: 2.4 },
+        { id: 'jupiter-ganymede', name: 'Ganymede', zoomDistance: 2.8 },
+        { id: 'jupiter-callisto', name: 'Callisto', zoomDistance: 3.2 },
+      ],
+    },
+    'saturn-moons': {
+      parentIndex: 5,
+      targets: [
+        { id: 'saturn-mimas', name: 'Mimas', zoomDistance: 2.1 },
+        { id: 'saturn-enceladus', name: 'Enceladus', zoomDistance: 2.3 },
+        { id: 'saturn-tethys', name: 'Tethys', zoomDistance: 2.5 },
+        { id: 'saturn-dione', name: 'Dione', zoomDistance: 2.6 },
+        { id: 'saturn-rhea', name: 'Rhea', zoomDistance: 2.7 },
+        { id: 'saturn-titan', name: 'Titan', zoomDistance: 3.1 },
+        { id: 'saturn-iapetus', name: 'Iapetus', zoomDistance: 3.6 },
+      ],
+    },
+  }), []);
+
+  const targetGroups = useMemo(() => {
+    const groups = {
+      planets: planets.map((planet, index) => ({
+        id: `planet-${planet.name.toLowerCase()}`,
+        name: planet.name,
+        ref: planet.ref,
+        zoomDistance: planet.zoomDistance,
+        type: 'planet',
+        parentPlanetIndex: index,
+      })),
+    };
+
+    Object.entries(orbitingGroups).forEach(([groupId, group]) => {
+      groups[groupId] = group.targets.map((target) => ({
+        ...target,
+        ref: getTargetRef(target.id),
+        type: 'orbiting',
+        parentPlanetIndex: group.parentIndex,
+      }));
+    });
+
+    return groups;
+  }, [planets, orbitingGroups, getTargetRef]);
+
+  const focusTargets = targetGroups[focusGroup] ?? targetGroups.planets;
+
   useEffect(() => {
     if (cameraPreset !== 'follow') {
       setIsZoomed(false);
     }
   }, [cameraPreset]);
 
+  useEffect(() => {
+    if (focusGroup === 'planets' && focusIndex !== planetIndex) {
+      setFocusIndex(planetIndex);
+    }
+  }, [focusGroup, focusIndex, planetIndex]);
+
   // Scroll handler to switch between planets
   const scrollHandler = useCallback((event) => {
-    setIsZoomed(false);
+    if (event.deltaY === 0) return;
+    const direction = event.deltaY > 0 ? 1 : -1;
 
-    if (event.deltaY > 0 && planetIndex < planets.length - 1) {
-      const next = planetIndex + 1;
-      setPlanetIndex(next);
-      setSelectedPlanet((prev) => (prev !== null ? next : prev));
-    } else if (event.deltaY < 0 && planetIndex > 0) {
-      const next = planetIndex - 1;
-      setPlanetIndex(next);
-      setSelectedPlanet((prev) => (prev !== null ? next : prev));
+    if (focusGroup === 'planets') {
+      setIsZoomed(false);
+      const next = planetIndex + direction;
+      if (next >= 0 && next < planets.length) {
+        setPlanetIndex(next);
+        setFocusIndex(next);
+        setSelectedPlanet((prev) => (prev !== null ? next : prev));
+      }
+      return;
     }
-  }, [planetIndex, planets]);
+
+    const next = focusIndex + direction;
+    if (next >= 0 && next < focusTargets.length) {
+      setFocusIndex(next);
+      setIsZoomed(true);
+      return;
+    }
+
+    const parentIndex = orbitingGroups[focusGroup]?.parentIndex ?? planetIndex;
+    setFocusGroup('planets');
+    setPlanetIndex(parentIndex);
+    setFocusIndex(parentIndex);
+    setIsZoomed(false);
+    setSelectedPlanet(null);
+  }, [focusGroup, focusIndex, focusTargets.length, orbitingGroups, planetIndex, planets.length]);
 
   useEffect(() => {
     window.addEventListener('wheel', scrollHandler);
@@ -256,20 +354,46 @@ export default function App() {
 
   // Handle planet click
   const handlePlanetClick = (index) => {
-    if (planetIndex === index) {
+    setFocusGroup('planets');
+    setPlanetIndex(index);
+    setFocusIndex(index);
+    if (focusGroup === 'planets' && planetIndex === index) {
       setIsZoomed((prevZoom) => !prevZoom);
       setSelectedPlanet((prev) => (prev === index ? null : index));
     } else {
-      setPlanetIndex(index);
       setIsZoomed(true);
       setSelectedPlanet(index);
     }
   };
 
+  const handleOrbitingTargetClick = useCallback((groupId, index, parentIndex) => {
+    setFocusGroup(groupId);
+    setFocusIndex(index);
+    setPlanetIndex(parentIndex);
+    setIsZoomed(true);
+    setSelectedPlanet(null);
+  }, []);
+
   const closeInfoPanel = () => {
     setSelectedPlanet(null);
     setIsZoomed(false);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape') return;
+      if (focusGroup === 'planets') return;
+      const parentIndex = orbitingGroups[focusGroup]?.parentIndex ?? planetIndex;
+      setFocusGroup('planets');
+      setPlanetIndex(parentIndex);
+      setFocusIndex(parentIndex);
+      setIsZoomed(false);
+      setSelectedPlanet(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [focusGroup, orbitingGroups, planetIndex]);
 
   // Create an array to store asteroid objects
   const asteroids = useMemo(() => {
@@ -337,6 +461,12 @@ export default function App() {
             timeScale={timeScale}
             paused={isPaused}
             showLabels={showLabels}
+            moonRef={getTargetRef('earth-moon')}
+            issRef={getTargetRef('earth-iss')}
+            satelliteRef={getTargetRef('earth-satellite')}
+            onMoonSelect={() => handleOrbitingTargetClick('earth-orbit', 0, 2)}
+            onIssSelect={() => handleOrbitingTargetClick('earth-orbit', 1, 2)}
+            onSatelliteSelect={() => handleOrbitingTargetClick('earth-orbit', 2, 2)}
           />
 
           {/* Models for Mars */}
@@ -345,6 +475,10 @@ export default function App() {
             timeScale={timeScale}
             paused={isPaused}
             showLabels={showLabels}
+            phobosRef={getTargetRef('mars-phobos')}
+            deimosRef={getTargetRef('mars-deimos')}
+            onPhobosSelect={() => handleOrbitingTargetClick('mars-moons', 0, 3)}
+            onDeimosSelect={() => handleOrbitingTargetClick('mars-moons', 1, 3)}
           />
 
           {/* Models for Jupiter */}
@@ -353,6 +487,14 @@ export default function App() {
             timeScale={timeScale}
             paused={isPaused}
             showLabels={showLabels}
+            ioRef={getTargetRef('jupiter-io')}
+            europaRef={getTargetRef('jupiter-europa')}
+            ganymedeRef={getTargetRef('jupiter-ganymede')}
+            callistoRef={getTargetRef('jupiter-callisto')}
+            onIoSelect={() => handleOrbitingTargetClick('jupiter-moons', 0, 4)}
+            onEuropaSelect={() => handleOrbitingTargetClick('jupiter-moons', 1, 4)}
+            onGanymedeSelect={() => handleOrbitingTargetClick('jupiter-moons', 2, 4)}
+            onCallistoSelect={() => handleOrbitingTargetClick('jupiter-moons', 3, 4)}
           />
 
           {/* Models for Saturn */}
@@ -361,6 +503,20 @@ export default function App() {
             timeScale={timeScale}
             paused={isPaused}
             showLabels={showLabels}
+            mimasRef={getTargetRef('saturn-mimas')}
+            enceladusRef={getTargetRef('saturn-enceladus')}
+            tethysRef={getTargetRef('saturn-tethys')}
+            dioneRef={getTargetRef('saturn-dione')}
+            rheaRef={getTargetRef('saturn-rhea')}
+            titanRef={getTargetRef('saturn-titan')}
+            iapetusRef={getTargetRef('saturn-iapetus')}
+            onMimasSelect={() => handleOrbitingTargetClick('saturn-moons', 0, 5)}
+            onEnceladusSelect={() => handleOrbitingTargetClick('saturn-moons', 1, 5)}
+            onTethysSelect={() => handleOrbitingTargetClick('saturn-moons', 2, 5)}
+            onDioneSelect={() => handleOrbitingTargetClick('saturn-moons', 3, 5)}
+            onRheaSelect={() => handleOrbitingTargetClick('saturn-moons', 4, 5)}
+            onTitanSelect={() => handleOrbitingTargetClick('saturn-moons', 5, 5)}
+            onIapetusSelect={() => handleOrbitingTargetClick('saturn-moons', 6, 5)}
           />
 
           {/* Asteroids */}
@@ -375,7 +531,7 @@ export default function App() {
         <CameraReporter planets={planets} cameraDataRef={cameraDataRef} />
 
         {/* Camera controller to follow planets */}
-        <CameraController planets={planets} planetIndex={planetIndex} isZoomed={isZoomed} mode={cameraPreset} />
+        <CameraController targets={focusTargets} targetIndex={focusIndex} isZoomed={isZoomed} mode={cameraPreset} />
       </Canvas>
 
       <HudMenu

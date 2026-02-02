@@ -1,16 +1,18 @@
-import React, { useRef } from 'react'
+import React, { useRef, forwardRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Satellite({
+const Satellite = forwardRef(function Satellite({
   earthRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/satellite.gltf')
-  const satelliteRef = useRef();
+  const localRef = useRef();
+  const satelliteRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Define orbit parameters
@@ -34,7 +36,14 @@ export default function Satellite({
   });
 
   return (
-    <group ref={satelliteRef} dispose={null}>
+    <group
+      ref={satelliteRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group rotation={[-1.755, 0.06, 2.589]} scale={[0.02, 0.02, 0.02]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[0, 0, 0.186]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={[0.875, 0.883, 0.875]}>
@@ -82,6 +91,8 @@ export default function Satellite({
       <OrbitalLabel text="Satellite" visible={showLabel} position={[0, 0.25, 0]} distanceFactor={6} />
     </group>
   )
-}
+})
+
+export default Satellite
 
 useGLTF.preload('/models/satellite.gltf')

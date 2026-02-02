@@ -1,16 +1,18 @@
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Rhea({
+const Rhea = forwardRef(function Rhea({
   saturnRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { nodes, materials } = useGLTF('/models/Rhea.glb');
-  const rheaRef = useRef();
+  const localRef = useRef();
+  const rheaRef = ref ?? localRef;
   const timeRef = useRef(0);
 
   // Orbit parameters
@@ -35,13 +37,22 @@ export default function Rhea({
   });
 
   return (
-    <group ref={rheaRef} dispose={null}>
+    <group
+      ref={rheaRef}
+      dispose={null}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <group scale={0.002}>
         <mesh geometry={nodes.cylindrically_mapped_sphere.geometry} material={materials['Default OBJ.001']} />
       </group>
       <OrbitalLabel text="Rhea" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Rhea;
 
 useGLTF.preload('/models/Rhea.glb');

@@ -8,13 +8,49 @@ export default function JupiterModels({
   timeScale = 1,
   paused = false,
   showLabels = false,
+  ioRef,
+  europaRef,
+  ganymedeRef,
+  callistoRef,
+  onIoSelect,
+  onEuropaSelect,
+  onGanymedeSelect,
+  onCallistoSelect,
 }) {
   return (
     <>
-      <Ganymede jupiterRef={jupiterRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Callisto jupiterRef={jupiterRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Europa jupiterRef={jupiterRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Io jupiterRef={jupiterRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
+      <Ganymede
+        ref={ganymedeRef}
+        jupiterRef={jupiterRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onGanymedeSelect}
+      />
+      <Callisto
+        ref={callistoRef}
+        jupiterRef={jupiterRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onCallistoSelect}
+      />
+      <Europa
+        ref={europaRef}
+        jupiterRef={jupiterRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onEuropaSelect}
+      />
+      <Io
+        ref={ioRef}
+        jupiterRef={jupiterRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onIoSelect}
+      />
     </>
   );
 }

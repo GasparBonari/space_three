@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Europa({
+const Europa = forwardRef(function Europa({
   jupiterRef,
   timeScale = 1,
   paused = false,
   showLabel = false,
-}) {
+  onSelect,
+}, ref) {
   const { scene } = useGLTF('/models/europa.glb');
-  const europaRef = useRef();
+  const localRef = useRef();
+  const europaRef = ref ?? localRef;
   const timeRef = useRef(0);
   
   const orbitRadius = 6; // Radius of the orbit
@@ -36,11 +38,19 @@ export default function Europa({
   });
 
   return (
-    <group ref={europaRef}>
+    <group
+      ref={europaRef}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.(event);
+      }}
+    >
       <primitive object={scene} scale={[0.0004, 0.0004, 0.0004]} />
       <OrbitalLabel text="Europa" visible={showLabel} />
     </group>
   );
-}
+});
+
+export default Europa;
 
 useGLTF.preload('/models/europa.glb');

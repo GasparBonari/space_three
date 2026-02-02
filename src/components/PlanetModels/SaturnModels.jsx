@@ -11,16 +11,79 @@ export default function SaturnModels({
   timeScale = 1,
   paused = false,
   showLabels = false,
+  mimasRef,
+  enceladusRef,
+  tethysRef,
+  dioneRef,
+  rheaRef,
+  titanRef,
+  iapetusRef,
+  onMimasSelect,
+  onEnceladusSelect,
+  onTethysSelect,
+  onDioneSelect,
+  onRheaSelect,
+  onTitanSelect,
+  onIapetusSelect,
 }) {
   return (
     <>
-      <Titan saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Dione saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Enceladus saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Mimas saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Rhea saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Tethys saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
-      <Iapetus saturnRef={saturnRef} timeScale={timeScale} paused={paused} showLabel={showLabels} />
+      <Titan
+        ref={titanRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onTitanSelect}
+      />
+      <Dione
+        ref={dioneRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onDioneSelect}
+      />
+      <Enceladus
+        ref={enceladusRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onEnceladusSelect}
+      />
+      <Mimas
+        ref={mimasRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onMimasSelect}
+      />
+      <Rhea
+        ref={rheaRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onRheaSelect}
+      />
+      <Tethys
+        ref={tethysRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onTethysSelect}
+      />
+      <Iapetus
+        ref={iapetusRef}
+        saturnRef={saturnRef}
+        timeScale={timeScale}
+        paused={paused}
+        showLabel={showLabels}
+        onSelect={onIapetusSelect}
+      />
     </>
   );
 }
