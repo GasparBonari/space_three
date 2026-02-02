@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
@@ -11,7 +11,9 @@ export default function ISS({
   showLabel = false,
 }) {
   const { scene } = useGLTF('/models/iss.glb');
-  const issRef = useRef();
+  const issScene = useMemo(() => scene.clone(true), [scene]);
+  const issGroupRef = useRef();
+  const issModelRef = useRef();
   const timeRef = useRef(0);
 
   // Define orbit parameters for the ISS
@@ -20,7 +22,7 @@ export default function ISS({
   const inclination = 1; // Tilt of the orbit (ISS orbits Earth with an inclination)
 
   useFrame((_, delta) => {
-    if (issRef.current && earthRef.current) {
+    if (issGroupRef.current && earthRef.current) {
       if (!paused) {
         timeRef.current += delta * timeScale;
       }
@@ -32,18 +34,18 @@ export default function ISS({
       const z = earthPosition.z + Math.sin(theta) * orbitRadius * Math.cos(inclination); // Slight tilt
       const y = earthPosition.y + Math.sin(theta) * orbitRadius * Math.sin(inclination); // Vertical movement based on inclination
 
-      issRef.current.position.set(x, y, z); // Set the position of the ISS
+      issGroupRef.current.position.set(x, y, z); // Set the position of the ISS
 
       // Rotate the ISS to face along its orbit (optional for realism)
-      if (!paused) {
-        issRef.current.lookAt(earthPosition);
+      if (!paused && issModelRef.current) {
+        issModelRef.current.lookAt(earthPosition);
       }
     }
   });
 
   return (
-    <group ref={issRef}>
-      <primitive object={scene} scale={scale || [0.004, 0.004, 0.004]} />
+    <group ref={issGroupRef} dispose={null}>
+      <primitive ref={issModelRef} object={issScene} scale={scale ?? [0.004, 0.004, 0.004]} />
       <OrbitalLabel text="ISS" visible={showLabel} position={[0, 0.25, 0]} distanceFactor={6} />
     </group>
   );
