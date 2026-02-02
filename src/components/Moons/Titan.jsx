@@ -1,8 +1,14 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Titan({ saturnRef, timeScale = 1, paused = false }) {
+export default function Titan({
+  saturnRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/titan.gltf');
   const titanRef = useRef();
   const timeRef = useRef(0);
@@ -35,6 +41,7 @@ export default function Titan({ saturnRef, timeScale = 1, paused = false }) {
         <mesh geometry={nodes.Clouds_Clouds_0.geometry} material={materials.Clouds} />
         <mesh geometry={nodes.Titan_Titan_0.geometry} material={materials.Titan} />
       </group>
+      <OrbitalLabel text="Titan" visible={showLabel} />
     </group>
   );
 }

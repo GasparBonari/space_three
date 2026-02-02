@@ -1,8 +1,14 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Moon({ earthRef, timeScale = 1, paused = false }) {
+export default function Moon({
+  earthRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/moon.gltf');
   const moonRef = useRef();
   const timeRef = useRef(0);
@@ -38,6 +44,7 @@ export default function Moon({ earthRef, timeScale = 1, paused = false }) {
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Material__50} rotation={[-Math.PI / 2, 0, 0]} scale={0.2}/>
       </group>
+      <OrbitalLabel text="Moon" visible={showLabel} position={[0, 0.45, 0]} />
     </group>
   )
 }

@@ -1,8 +1,15 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function ISS({ earthRef, scale, timeScale = 1, paused = false }) {
+export default function ISS({
+  earthRef,
+  scale,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { scene } = useGLTF('/models/iss.glb');
   const issRef = useRef();
   const timeRef = useRef(0);
@@ -34,7 +41,12 @@ export default function ISS({ earthRef, scale, timeScale = 1, paused = false }) 
     }
   });
 
-  return <primitive ref={issRef} object={scene} scale={[0.004, 0.004, 0.004]}/>;
+  return (
+    <group ref={issRef}>
+      <primitive object={scene} scale={scale || [0.004, 0.004, 0.004]} />
+      <OrbitalLabel text="ISS" visible={showLabel} position={[0, 0.25, 0]} distanceFactor={6} />
+    </group>
+  );
 }
 
 useGLTF.preload('/models/iss.glb');

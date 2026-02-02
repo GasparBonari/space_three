@@ -1,8 +1,14 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Phobos({ marsRef, timeScale = 1, paused = false }) {
+export default function Phobos({
+  marsRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/phobos.gltf');
   const phobosRef = useRef();
   const timeRef = useRef(0);
@@ -33,6 +39,7 @@ export default function Phobos({ marsRef, timeScale = 1, paused = false }) {
   return (
     <group ref={phobosRef} dispose={null}>
       <mesh geometry={nodes.Object_4.geometry} material={materials.phobos_tex_01} rotation={[Math.PI / 2, 0, 0]} scale={0.01}/>
+      <OrbitalLabel text="Phobos" visible={showLabel} />
     </group>
   );
 }

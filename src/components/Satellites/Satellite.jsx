@@ -1,8 +1,14 @@
 import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Satellite({ earthRef, timeScale = 1, paused = false }) {
+export default function Satellite({
+  earthRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/satellite.gltf')
   const satelliteRef = useRef();
   const timeRef = useRef(0);
@@ -73,6 +79,7 @@ export default function Satellite({ earthRef, timeScale = 1, paused = false }) {
           <mesh geometry={nodes.Object_53.geometry} material={materials.Satellite} position={[0, 0, -1.237]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} />
         </group>
       </group>
+      <OrbitalLabel text="Satellite" visible={showLabel} position={[0, 0.25, 0]} distanceFactor={6} />
     </group>
   )
 }

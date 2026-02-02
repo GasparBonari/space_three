@@ -332,16 +332,36 @@ export default function App() {
           ))}
 
           {/* Models for Earth */}
-          <EarthModels earthRef={planets[2].ref} timeScale={timeScale} paused={isPaused} />
+          <EarthModels
+            earthRef={planets[2].ref}
+            timeScale={timeScale}
+            paused={isPaused}
+            showLabels={showLabels}
+          />
 
           {/* Models for Mars */}
-          <MarsModels marsRef={planets[3].ref} timeScale={timeScale} paused={isPaused} />
+          <MarsModels
+            marsRef={planets[3].ref}
+            timeScale={timeScale}
+            paused={isPaused}
+            showLabels={showLabels}
+          />
 
           {/* Models for Jupiter */}
-          <JupiterModels jupiterRef={planets[4].ref} timeScale={timeScale} paused={isPaused} />
+          <JupiterModels
+            jupiterRef={planets[4].ref}
+            timeScale={timeScale}
+            paused={isPaused}
+            showLabels={showLabels}
+          />
 
           {/* Models for Saturn */}
-          <SaturnModels saturnRef={planets[5].ref} timeScale={timeScale} paused={isPaused} />
+          <SaturnModels
+            saturnRef={planets[5].ref}
+            timeScale={timeScale}
+            paused={isPaused}
+            showLabels={showLabels}
+          />
 
           {/* Asteroids */}
           <AsteroidField asteroids={asteroids} timeScale={timeScale} paused={isPaused} />

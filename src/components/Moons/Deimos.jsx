@@ -1,8 +1,14 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Deimos({ marsRef, timeScale = 1, paused = false }) {
+export default function Deimos({
+  marsRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/deimos.gltf');
   const deimosRef = useRef();
   const timeRef = useRef(0);
@@ -38,6 +44,7 @@ export default function Deimos({ marsRef, timeScale = 1, paused = false }) {
         rotation={[Math.PI / 2, 0, -Math.PI]}
         scale={0.0001}
       />
+      <OrbitalLabel text="Deimos" visible={showLabel} />
     </group>
   );
 }

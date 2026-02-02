@@ -1,8 +1,14 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei';
+import OrbitalLabel from '../UI/OrbitalLabel/OrbitalLabel';
 
-export default function Ganymede({ jupiterRef, timeScale = 1, paused = false }) {
+export default function Ganymede({
+  jupiterRef,
+  timeScale = 1,
+  paused = false,
+  showLabel = false,
+}) {
   const { nodes, materials } = useGLTF('/models/ganymede.gltf')
   const ganymedeRef = useRef();
   const timeRef = useRef(0);
@@ -31,6 +37,7 @@ export default function Ganymede({ jupiterRef, timeScale = 1, paused = false }) 
   return (
     <group ref={ganymedeRef} dispose={null}>
       <mesh geometry={nodes['Ganimede_Material_#25_0'].geometry} material={materials.Material_25} rotation={[-Math.PI / 2, 0, 0]} scale={0.01}/>
+      <OrbitalLabel text="Ganymede" visible={showLabel} />
     </group>
   )
 }
