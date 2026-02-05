@@ -14,6 +14,8 @@ export default function ControlPanel({
   onTimeScaleChange,
   cameraPreset,
   onCameraPresetChange,
+  cameraDistance,
+  onCameraDistanceChange,
   showWireframe,
   onToggleWireframe,
   showLabels,
@@ -64,6 +66,21 @@ export default function ControlPanel({
                 {preset.label}
               </button>
             ))}
+          </div>
+        </div>
+
+        <div className="control-panel__section">
+          <div className="control-panel__label">Camera Distance</div>
+          <div className="control-panel__slider">
+            <input
+              type="range"
+              min="0.5"
+              max="2"
+              step="0.05"
+              value={cameraDistance}
+              onChange={(event) => onCameraDistanceChange(Number(event.target.value))}
+            />
+            <span>{cameraDistance.toFixed(2)}x</span>
           </div>
         </div>
 

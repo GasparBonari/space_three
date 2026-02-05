@@ -28,7 +28,7 @@ import MiniMap from './components/UI/MiniMap/MiniMap';
 import HudMenu from './components/UI/HudMenu/HudMenu';
 
 // Component to control the camera and follow the orbiting planet
-function CameraController({ targets, targetIndex, isZoomed, mode }) {
+function CameraController({ targets, targetIndex, isZoomed, mode, distanceMultiplier = 1 }) {
   const helpers = useMemo(() => ({
     desired: new THREE.Vector3(),
     direction: new THREE.Vector3(),
@@ -49,7 +49,7 @@ function CameraController({ targets, targetIndex, isZoomed, mode }) {
   useFrame(({ camera }) => {
     if (mode && mode !== 'follow') {
       const preset = presets[mode] || presets.overview;
-      helpers.desired.copy(preset);
+      helpers.desired.copy(preset).multiplyScalar(distanceMultiplier);
       camera.position.lerp(helpers.desired, 0.05);
       helpers.targetMatrix.lookAt(camera.position, helpers.origin, camera.up);
       helpers.targetQuaternion.setFromRotationMatrix(helpers.targetMatrix);
@@ -64,9 +64,9 @@ function CameraController({ targets, targetIndex, isZoomed, mode }) {
       const targetPosition = helpers.worldPosition;
 
       // Get the custom zoom distance for each planet
-      const zoomDistance = isZoomed ? target.zoomDistance : 7;
-      const offsetX = isZoomed ? 1 : 3;
-      const padding = isZoomed ? 0.6 : 1.2;
+      const zoomDistance = (isZoomed ? target.zoomDistance : 7) * distanceMultiplier;
+      const offsetX = (isZoomed ? 1 : 3) * distanceMultiplier;
+      const padding = (isZoomed ? 0.6 : 1.2) * distanceMultiplier;
 
       helpers.desired.set(
         targetPosition.x + offsetX,
@@ -190,6 +190,7 @@ export default function App() {
   const [timeScale, setTimeScale] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [cameraPreset, setCameraPreset] = useState('follow');
+  const [cameraDistance, setCameraDistance] = useState(1);
   const [showWireframe, setShowWireframe] = useState(false);
   const [showLabels, setShowLabels] = useState(false);
   const [showHudMenu, setShowHudMenu] = useState(false);
@@ -531,7 +532,13 @@ export default function App() {
         <CameraReporter planets={planets} cameraDataRef={cameraDataRef} />
 
         {/* Camera controller to follow planets */}
-        <CameraController targets={focusTargets} targetIndex={focusIndex} isZoomed={isZoomed} mode={cameraPreset} />
+        <CameraController
+          targets={focusTargets}
+          targetIndex={focusIndex}
+          isZoomed={isZoomed}
+          mode={cameraPreset}
+          distanceMultiplier={cameraDistance}
+        />
       </Canvas>
 
       <HudMenu
@@ -561,6 +568,8 @@ export default function App() {
           onTimeScaleChange={setTimeScale}
           cameraPreset={cameraPreset}
           onCameraPresetChange={setCameraPreset}
+          cameraDistance={cameraDistance}
+          onCameraDistanceChange={setCameraDistance}
           showWireframe={showWireframe}
           onToggleWireframe={() => setShowWireframe((prev) => !prev)}
           showLabels={showLabels}
