@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useProgress } from '@react-three/drei';
 import PlanetBadge from '../PlanetBadge/PlanetBadge';
+import { MODEL_CREDITS } from './modelCredits';
 import './IntroPanel.css';
 
 export default function IntroPanel({ onClose }) {
   const { active, progress, item, loaded, total } = useProgress();
   const [ready, setReady] = useState(false);
+  const [creditsOpen, setCreditsOpen] = useState(false);
+  const credits = MODEL_CREDITS;
 
   const percent = useMemo(() => {
     if (!total) return 0;
@@ -23,6 +26,16 @@ export default function IntroPanel({ onClose }) {
       setReady(true);
     }
   }, [active, percent, ready, total]);
+
+  const openCredits = () => setCreditsOpen(true);
+  const closeCredits = () => setCreditsOpen(false);
+  const stopScrollPropagation = (event) => {
+    event.stopPropagation();
+  };
+  const blockBackgroundScroll = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
 
   return (
     <div className="intro-panel">
@@ -71,23 +84,79 @@ export default function IntroPanel({ onClose }) {
         </div>
 
         <div className="intro-panel__actions">
-          <button
-            className="intro-panel__button intro-panel__button--primary"
-            type="button"
-            onClick={onClose}
-            disabled={!ready}
-          >
-            {ready ? 'Enter Orbits' : 'Preparing Systems'}
-          </button>
-          <button
-            className="intro-panel__button"
-            type="button"
-            onClick={onClose}
-            disabled={!ready}
-          >
-            Dismiss
-          </button>
+          <div className="intro-panel__credits">
+            <button className="intro-panel__credits-toggle" type="button" onClick={openCredits}>
+              Model credits
+            </button>
+          </div>
+
+          <div className="intro-panel__action-buttons">
+            <button
+              className="intro-panel__button intro-panel__button--primary"
+              type="button"
+              onClick={onClose}
+              disabled={!ready}
+            >
+              {ready ? 'Enter Orbits' : 'Preparing Systems'}
+            </button>
+            <button
+              className="intro-panel__button"
+              type="button"
+              onClick={onClose}
+              disabled={!ready}
+            >
+              Dismiss
+            </button>
+          </div>
         </div>
+
+        {creditsOpen && (
+          <div
+            className="intro-panel__credits-overlay"
+            onClick={closeCredits}
+            onWheel={blockBackgroundScroll}
+            onTouchMove={blockBackgroundScroll}
+          >
+            <div
+              className="intro-panel__credits-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Model credits"
+              onClick={stopScrollPropagation}
+              onWheel={stopScrollPropagation}
+              onTouchMove={stopScrollPropagation}
+            >
+              <button
+                className="intro-panel__credits-close"
+                type="button"
+                onClick={closeCredits}
+                aria-label="Close credits"
+              >
+                ×
+              </button>
+              <div className="intro-panel__credits-title">Model credits</div>
+              <ul className="intro-panel__credits-list">
+                {credits.map((credit) => (
+                  <li key={credit.url}>
+                    This work is based on &quot;{credit.title}&quot; (
+                    <a href={credit.url} target="_blank" rel="noreferrer noopener">
+                      {credit.url}
+                    </a>
+                    ) by{' '}
+                    <a href={credit.authorUrl} target="_blank" rel="noreferrer noopener">
+                      {credit.author}
+                    </a>{' '}
+                    licensed under{' '}
+                    <a href={credit.licenseUrl} target="_blank" rel="noreferrer noopener">
+                      {credit.license}
+                    </a>
+                    .
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
