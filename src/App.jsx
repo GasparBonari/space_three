@@ -180,6 +180,8 @@ const Planet = React.forwardRef(
   }
 );
 
+const MIN_DESKTOP_WIDTH = 1024;
+
 export default function App() {
   const [planetIndex, setPlanetIndex] = useState(2); // Track which planet camera should follow
   const [focusGroup, setFocusGroup] = useState('planets');
@@ -196,6 +198,9 @@ export default function App() {
   const [showHudMenu, setShowHudMenu] = useState(false);
   const [showControlPanel, setShowControlPanel] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MIN_DESKTOP_WIDTH
+  );
   const numAsteroids = 50;
   const starCount = 3000;
   const backgroundStarCount = 2000;
@@ -306,6 +311,16 @@ export default function App() {
   const focusTargets = targetGroups[focusGroup] ?? targetGroups.planets;
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < MIN_DESKTOP_WIDTH);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     if (cameraPreset !== 'follow') {
       setIsZoomed(false);
     }
@@ -349,9 +364,10 @@ export default function App() {
   }, [focusGroup, focusIndex, focusTargets.length, orbitingGroups, planetIndex, planets.length]);
 
   useEffect(() => {
+    if (isSmallScreen) return undefined;
     window.addEventListener('wheel', scrollHandler);
     return () => window.removeEventListener('wheel', scrollHandler);
-  }, [scrollHandler]);
+  }, [scrollHandler, isSmallScreen]);
 
   // Handle planet click
   const handlePlanetClick = (index) => {
@@ -381,6 +397,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    if (isSmallScreen) return undefined;
     const handleKeyDown = (event) => {
       if (event.key !== 'Escape') return;
       if (focusGroup === 'planets') return;
@@ -394,7 +411,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [focusGroup, orbitingGroups, planetIndex]);
+  }, [focusGroup, orbitingGroups, planetIndex, isSmallScreen]);
 
   // Create an array to store asteroid objects
   const asteroids = useMemo(() => {
@@ -418,6 +435,18 @@ export default function App() {
       };
     });
   }, [numAsteroids]);
+
+  if (isSmallScreen) {
+    return (
+      <div className="screen-gate">
+        <div className="screen-gate-card">
+          <h1>Desktop Screen Required</h1>
+          <p>This 3D experience is not available on small screens.</p>
+          <p>Use a display width of at least {MIN_DESKTOP_WIDTH}px.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
