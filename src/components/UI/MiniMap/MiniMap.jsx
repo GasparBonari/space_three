@@ -1,8 +1,13 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './MiniMap.css';
+
+const MIN_MAP_SIZE = 140;
+const MAX_MAP_SIZE = 320;
+const MAP_SIZE_STEP = 20;
 
 export default function MiniMap({ planets, cameraDataRef, activeIndex, maxOrbitRadius }) {
   const canvasRef = useRef(null);
+  const [mapSize, setMapSize] = useState(200);
   const orbitRadii = useMemo(() => planets.map((planet) => planet.radius), [planets]);
 
   useEffect(() => {
@@ -93,13 +98,40 @@ export default function MiniMap({ planets, cameraDataRef, activeIndex, maxOrbitR
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
     };
-  }, [activeIndex, cameraDataRef, maxOrbitRadius, orbitRadii, planets]);
+  }, [activeIndex, cameraDataRef, mapSize, maxOrbitRadius, orbitRadii, planets]);
 
   return (
     <div className="mini-map">
       <div className="mini-map__inner">
-        <div className="mini-map__label">Camera Map</div>
-        <canvas ref={canvasRef} width={200} height={200} />
+        <div className="mini-map__header">
+          <div className="mini-map__label">Camera Map</div>
+          <div className="mini-map__controls">
+            <button
+              type="button"
+              className="mini-map__button"
+              onClick={() => setMapSize((size) => Math.max(MIN_MAP_SIZE, size - MAP_SIZE_STEP))}
+              disabled={mapSize <= MIN_MAP_SIZE}
+              aria-label="Decrease camera map size"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              className="mini-map__button"
+              onClick={() => setMapSize((size) => Math.min(MAX_MAP_SIZE, size + MAP_SIZE_STEP))}
+              disabled={mapSize >= MAX_MAP_SIZE}
+              aria-label="Increase camera map size"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <canvas
+          ref={canvasRef}
+          width={mapSize}
+          height={mapSize}
+          style={{ width: `${mapSize}px`, height: `${mapSize}px` }}
+        />
       </div>
     </div>
   );
